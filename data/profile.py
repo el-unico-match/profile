@@ -5,3 +5,5 @@ class Profile(BaseModel):
    id: str
    username: str
    description: str
+   gender: str
+   looking_for: str

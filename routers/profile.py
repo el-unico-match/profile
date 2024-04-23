@@ -9,7 +9,8 @@ from data.profile import Profile
 #   description: str
 
 # Sustituto provisorio de base de datos con los perfiles
-profiles_list = [Profile(id="1",username="LuisHuergo",description="Argentino. Ingeniero civil"),Profile(id="2",username="ElisaBachofen",description="Argentina. Ingeniera civil") ]
+profiles_list = [Profile(id="1",username="LuisHuergo",description="Argentino. Ingeniero civil",gender="Hombre",looking_for="Mujer"),
+                 Profile(id="2",username="ElisaBachofen",description="Argentina. Ingeniera civil",gender="Mujer",looking_for="Hombre") ]
 
 router=APIRouter(tags=["profile"])
 
