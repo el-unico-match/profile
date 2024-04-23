@@ -1,11 +1,12 @@
 from fastapi import APIRouter,HTTPException
-from pydantic import BaseModel
+from data.profile import Profile
+#from pydantic import BaseModel
 
 # Entidad para definir los perfiles
-class Profile(BaseModel):
-   id: str
-   username: str
-   description: str
+#class Profile(BaseModel):
+#   id: str
+#   username: str
+#   description: str
 
 # Sustituto provisorio de base de datos con los perfiles
 profiles_list = [Profile(id="1",username="LuisHuergo",description="Argentino. Ingeniero civil"),Profile(id="2",username="ElisaBachofen",description="Argentina. Ingeniera civil") ]

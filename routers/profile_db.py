@@ -1,13 +1,14 @@
 from fastapi import APIRouter,HTTPException
-from pydantic import BaseModel
+#from pydantic import BaseModel
 from data.client import client_db
+from data.profile import Profile
 from bson import ObjectId
 
 # Entidad para definir los perfiles
-class Profile(BaseModel):
-   id: str
-   username: str
-   description: str
+#class Profile(BaseModel):
+#   id: str
+#   username: str
+#   description: str
 
 def profile_schema(profile)-> dict:
     return {"id":str(profile["_id"]),"username":profile["username"],"description":profile["description"]}
