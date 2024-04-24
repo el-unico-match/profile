@@ -24,7 +24,7 @@ router=APIRouter(tags=["profile_db"])
 
 # Operaciones de la API
 
-@router.get("/user/{id}/profile",response_model=Profile)
+@router.get("/user/profile/{id}",response_model=Profile)
 async def view_profile(id: str): 
    try:
       profile = client_db.local.profiles.find_one({"_id":ObjectId(id)})
@@ -32,7 +32,7 @@ async def view_profile(id: str):
    except:
       raise HTTPException(status_code=400,detail="No se ha encontrado el usuario")
 
-@router.put("/user/{id}/profile")
+@router.put("/user/profile/{id}")
 async def update_profile(id: str,updated_profile:Profile):     
    if id!=updated_profile.id:
       raise HTTPException(status_code=400,detail="El id de la ruta no coincide con el id del perfil") 
@@ -56,7 +56,7 @@ async def update_profile(id: str,updated_profile:Profile):
 #      raise HTTPException(status_code=400,detail="No existe el usuario")
 #	  #return {"error": "No existe el usuario"}  
 
-@router.delete("/user/{id}/profile")
+@router.delete("/user/profile/{id}")
 async def delete_profile(id: str): 
    found = client_db.local.profiles.find_one_and_delete({"_id":ObjectId(id)})
    

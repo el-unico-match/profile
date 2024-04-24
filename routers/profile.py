@@ -23,7 +23,7 @@ router=APIRouter(tags=["profile"])
 
 # Operaciones de la API
 
-@router.get("/user/{id}/profile",response_model=Profile)
+@router.get("/user/profile/{id}",response_model=Profile)
 async def view_profile(id: str): 
 #   return view(id)
    profiles = filter(lambda profiles_list: profiles_list.id==id,profiles_list)
@@ -33,7 +33,7 @@ async def view_profile(id: str):
        raise HTTPException(status_code=400,detail="No se ha encontrado el usuario")
        #return {"error":"No se ha encontrado el usuario"}  
 
-@router.put("/user/{id}/profile")
+@router.put("/user/profile/{id}")
 async def update_profile(id: str,updated_profile:Profile):     
 #    update(id,updated_profile)
    if id!=updated_profile.id:
@@ -49,7 +49,7 @@ async def update_profile(id: str,updated_profile:Profile):
       raise HTTPException(status_code=400,detail="No existe el usuario")
 	  #return {"error": "No existe el usuario"}  
 
-@router.delete("/user/{id}/profile")
+@router.delete("/user/profile/{id}")
 async def delete_profile(id: str): 
 #    delete(id)
    found = False
