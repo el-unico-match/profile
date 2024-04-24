@@ -37,6 +37,11 @@ async def view_profile(id: str):
 #En lugar de id, usar userid	  
 @router.post("/user/profile/{id}")
 async def create_profile(id: str,new_profile:Profile):	 
+   found=client_db.local.profiles.find_one({"userid":id})
+   
+   if found:
+      raise HTTPException(status_code=400,detail="El usuario ya existe")        
+   
    profile_dict=dict(new_profile)
 #   print(profile_dict)   
 #   del profile_dict["id"]
@@ -49,12 +54,19 @@ async def update_profile(id: str,updated_profile:Profile):
    if id!=updated_profile.userid:
       raise HTTPException(status_code=400,detail="El id de la ruta no coincide con el id del perfil") 
    updated_profile_dict=dict(updated_profile)
-#   del updated_profile_dict["id"]
-   try:
-#      client_db.local.profiles.find_one_and_replace({"_id":ObjectId(id)},updated_profile_dict)
-      client_db.local.profiles.find_one_and_replace({"userid":id},updated_profile_dict)
-   except:
+   
+   found=client_db.local.profiles.find_one_and_replace({"userid":id},updated_profile_dict)
+
+   if not found:
       raise HTTPException(status_code=400,detail="No existe el usuario")
+   
+   
+#   del updated_profile_dict["id"]
+#   try:
+##      client_db.local.profiles.find_one_and_replace({"_id":ObjectId(id)},updated_profile_dict)
+#      client_db.local.profiles.find_one_and_replace({"userid":id},updated_profile_dict)
+#   except:
+#      raise HTTPException(status_code=400,detail="No existe el usuario")
 
 #   if id!=updated_profile.id:
 #      raise HTTPException(status_code=400,detail="El id de la ruta no coincide con el id del perfil")      
