@@ -1,8 +1,9 @@
 from pydantic import BaseModel
+from typing import Optional
 
 # Entidad para definir los perfiles
 class Profile(BaseModel):
-   id: str
+   userid: str
    username: str
    description: str
    gender: str
