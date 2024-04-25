@@ -1,0 +1,7 @@
+#bson -- pymongo automatically installs it
+fastapi
+pydantic_settings 
+pymongo
+routers 
+typing
+uvicorn
