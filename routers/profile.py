@@ -1,14 +1,16 @@
 from fastapi import APIRouter,HTTPException
-from pydantic import BaseModel
+from data.profile import Profile
+#from pydantic import BaseModel
 
 # Entidad para definir los perfiles
-class Profile(BaseModel):
-   id: str
-   username: str
-   description: str
+#class Profile(BaseModel):
+#   id: str
+#   username: str
+#   description: str
 
 # Sustituto provisorio de base de datos con los perfiles
-profiles_list = [Profile(id="1",username="LuisHuergo",description="Argentino. Ingeniero civil"),Profile(id="2",username="ElisaBachofen",description="Argentina. Ingeniera civil") ]
+profiles_list = [Profile(userid="1",username="LuisHuergo",description="Argentino. Ingeniero civil",gender="Hombre",looking_for="Mujer"),
+                 Profile(userid="2",username="ElisaBachofen",description="Argentina. Ingeniera civil",gender="Mujer",looking_for="Hombre") ]
 
 router=APIRouter(tags=["profile"])
 
@@ -21,25 +23,34 @@ router=APIRouter(tags=["profile"])
 
 # Operaciones de la API
 
-@router.get("/user/{id}/profile",response_model=Profile)
+@router.get("/user/profile/{id}",response_model=Profile)
 async def view_profile(id: str): 
 #   return view(id)
-   profiles = filter(lambda profiles_list: profiles_list.id==id,profiles_list)
+   profiles = filter(lambda profiles_list: profiles_list.userid==id,profiles_list)
    try:
        return list(profiles)[0]
    except:
        raise HTTPException(status_code=400,detail="No se ha encontrado el usuario")
        #return {"error":"No se ha encontrado el usuario"}  
 
-@router.put("/user/{id}/profile")
+@router.post("/user/profile/{id}")
+async def create_profile(id: str,new_profile:Profile):
+   if id!=new_profile.userid:
+      raise HTTPException(status_code=400,detail="El id de la ruta no coincide con el id del perfil")   
+   for profile in profiles_list:
+       if profile.userid == id:
+          raise HTTPException(status_code=400,detail="El usuario ya existe")      
+   profiles_list.append(new_profile)   
+	  
+@router.put("/user/profile/{id}")
 async def update_profile(id: str,updated_profile:Profile):     
 #    update(id,updated_profile)
-   if id!=updated_profile.id:
+   if id!=updated_profile.userid:
       raise HTTPException(status_code=400,detail="El id de la ruta no coincide con el id del perfil")      
 	  #return {"error": "El id de la ruta no coincide con el id del perfil"}
    found = False
    for index,profile in enumerate(profiles_list):
-      if profile.id == id:
+      if profile.userid == id:
          profiles_list[index]=updated_profile   
          found = True
 
@@ -47,12 +58,12 @@ async def update_profile(id: str,updated_profile:Profile):
       raise HTTPException(status_code=400,detail="No existe el usuario")
 	  #return {"error": "No existe el usuario"}  
 
-@router.delete("/user/{id}/profile")
+@router.delete("/user/profile/{id}")
 async def delete_profile(id: str): 
 #    delete(id)
    found = False
    for index,profile in enumerate(profiles_list):
-      if profile.id == id:
+      if profile.userid == id:
          del profiles_list[index]
          found = True
    
