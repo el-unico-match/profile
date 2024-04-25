@@ -27,12 +27,6 @@ else:
    print("usa bd")
    app.include_router(profile_db.router)
 
-
-#if settings.disable_db==True:
-#   app.include_router(profile_db.router)
-#else:
-#   app.include_router(profile.router)
-
 # HTTP response
 # 100 información
 # 200 las cosas han ido bien
