@@ -25,14 +25,25 @@ async def view_profile(id: str):
    except:
       raise HTTPException(status_code=404,detail="No se ha encontrado el usuario")
 
+def validar(profile: Profile):	   
+   if profile.userid=="":
+      raise HTTPException(status_code=400,detail="Falta indicar el id de usuario")
+   if profile.username=="":
+      raise HTTPException(status_code=400,detail="Falta indicar el nombre de usuario")	  
+   if profile.gender=="":
+      raise HTTPException(status_code=400,detail="Falta indicar el genero")	 
+	   	  
+	  
 @router.post("/user/profile/")
 async def create_profile(new_profile:Profile):	 
-   if new_profile.userid=="":
-      raise HTTPException(status_code=400,detail="Falta indicar el id de usuario")
-   if new_profile.username=="":
-      raise HTTPException(status_code=400,detail="Falta indicar el nombre de usuario")	  
-   if new_profile.gender=="":
-      raise HTTPException(status_code=400,detail="Falta indicar el genero")	 
+#   if new_profile.userid=="":
+#      raise HTTPException(status_code=400,detail="Falta indicar el id de usuario")
+#   if new_profile.username=="":
+#      raise HTTPException(status_code=400,detail="Falta indicar el nombre de usuario")	  
+#   if new_profile.gender=="":
+#      raise HTTPException(status_code=400,detail="Falta indicar el genero")	 
+
+   validar(new_profile)
    
    found=client_db.local.profiles.find_one({"userid":new_profile.userid})
    
@@ -47,6 +58,9 @@ async def create_profile(new_profile:Profile):
 async def update_profile(id: str,updated_profile:Profile):     
    if id!=updated_profile.userid:
       raise HTTPException(status_code=400,detail="El id de la ruta no coincide con el id del perfil") 
+
+   validar(updated_profile)	  
+
    updated_profile_dict=dict(updated_profile)
    
    found=client_db.local.profiles.find_one_and_replace({"userid":id},updated_profile_dict)
