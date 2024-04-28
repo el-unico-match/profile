@@ -27,6 +27,13 @@ async def view_profile(id: str):
 
 @router.post("/user/profile/")
 async def create_profile(new_profile:Profile):	 
+   if new_profile.userid=="":
+      raise HTTPException(status_code=400,detail="Falta indicar el id de usuario")
+   if new_profile.username=="":
+      raise HTTPException(status_code=400,detail="Falta indicar el nombre de usuario")	  
+   if new_profile.gender=="":
+      raise HTTPException(status_code=400,detail="Falta indicar el genero")	 
+   
    found=client_db.local.profiles.find_one({"userid":new_profile.userid})
    
    if found:

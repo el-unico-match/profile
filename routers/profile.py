@@ -27,7 +27,15 @@ async def view_profile(id: str):
 @router.post("/user/profile/")
 async def create_profile(new_profile:Profile):
 #   if id!=new_profile.userid:
-#      raise HTTPException(status_code=400,detail="El id de la ruta no coincide con el id del perfil")   
+#      raise HTTPException(status_code=400,detail="El id de la ruta no coincide con el id del perfil")    
+
+   if new_profile.userid=="":
+      raise HTTPException(status_code=400,detail="Falta indicar el id de usuario")
+   if new_profile.username=="":
+      raise HTTPException(status_code=400,detail="Falta indicar el nombre de usuario")	  
+   if new_profile.gender=="":
+      raise HTTPException(status_code=400,detail="Falta indicar el genero")	 
+
    for profile in profiles_list:
 #       if profile.userid == id:
         if profile.userid == new_profile.userid:
