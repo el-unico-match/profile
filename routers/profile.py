@@ -22,7 +22,7 @@ async def view_profile(id: str):
    try:
        return list(profiles)[0]
    except:
-       raise HTTPException(status_code=400,detail="No se ha encontrado el usuario") 
+       raise HTTPException(status_code=404,detail="No se ha encontrado el usuario") 
 
 @router.post("/user/profile/")
 async def create_profile(new_profile:Profile):
@@ -45,7 +45,7 @@ async def update_profile(id: str,updated_profile:Profile):
          found = True
 
    if not found:
-      raise HTTPException(status_code=400,detail="No existe el usuario")  
+      raise HTTPException(status_code=404,detail="No existe el usuario")  
 
 @router.delete("/user/profile/{id}")
 async def delete_profile(id: str): 
@@ -56,4 +56,4 @@ async def delete_profile(id: str):
          found = True
    
    if not found:
-      raise HTTPException(status_code=400,detail="No existe el usuario")
+      raise HTTPException(status_code=404,detail="No existe el usuario")

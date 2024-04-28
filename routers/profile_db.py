@@ -23,7 +23,7 @@ async def view_profile(id: str):
       profile = client_db.local.profiles.find_one({"userid":id})
       return Profile(**profile_schema(profile)) 	  
    except:
-      raise HTTPException(status_code=400,detail="No se ha encontrado el usuario")
+      raise HTTPException(status_code=404,detail="No se ha encontrado el usuario")
 
 @router.post("/user/profile/")
 async def create_profile(new_profile:Profile):	 
@@ -45,7 +45,7 @@ async def update_profile(id: str,updated_profile:Profile):
    found=client_db.local.profiles.find_one_and_replace({"userid":id},updated_profile_dict)
 
    if not found:
-      raise HTTPException(status_code=400,detail="No existe el usuario")
+      raise HTTPException(status_code=404,detail="No existe el usuario")
   
 
 @router.delete("/user/profile/{id}")
@@ -54,4 +54,4 @@ async def delete_profile(id: str):
    found = client_db.local.profiles.find_one_and_delete({"userid":id})
 
    if not found:
-      raise HTTPException(status_code=400,detail="No existe el usuario")
+      raise HTTPException(status_code=404,detail="No existe el usuario")
