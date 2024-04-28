@@ -25,9 +25,9 @@ async def view_profile(id: str):
    except:
       raise HTTPException(status_code=400,detail="No se ha encontrado el usuario")
 
-@router.post("/user/profile/{id}")
-async def create_profile(id: str,new_profile:Profile):	 
-   found=client_db.local.profiles.find_one({"userid":id})
+@router.post("/user/profile/")
+async def create_profile(new_profile:Profile):	 
+   found=client_db.local.profiles.find_one({"userid":new_profile.userid})
    
    if found:
       raise HTTPException(status_code=400,detail="El usuario ya existe")        

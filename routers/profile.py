@@ -24,12 +24,13 @@ async def view_profile(id: str):
    except:
        raise HTTPException(status_code=400,detail="No se ha encontrado el usuario") 
 
-@router.post("/user/profile/{id}")
-async def create_profile(id: str,new_profile:Profile):
-   if id!=new_profile.userid:
-      raise HTTPException(status_code=400,detail="El id de la ruta no coincide con el id del perfil")   
+@router.post("/user/profile/")
+async def create_profile(new_profile:Profile):
+#   if id!=new_profile.userid:
+#      raise HTTPException(status_code=400,detail="El id de la ruta no coincide con el id del perfil")   
    for profile in profiles_list:
-       if profile.userid == id:
+#       if profile.userid == id:
+        if profile.userid == new_profile.userid:
           raise HTTPException(status_code=400,detail="El usuario ya existe")      
    profiles_list.append(new_profile)   
 	  
