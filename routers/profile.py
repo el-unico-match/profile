@@ -2,8 +2,8 @@ from fastapi import APIRouter,HTTPException
 from data.profile import Profile
 
 # Sustituto provisorio de base de datos con los perfiles
-profiles_list = [Profile(userid="1",username="LuisHuergo",description="Argentino. Ingeniero civil",gender="Hombre",looking_for="Mujer"),
-                 Profile(userid="2",username="ElisaBachofen",description="Argentina. Ingeniera civil",gender="Mujer",looking_for="Hombre") ]
+profiles_list = [Profile(userid="1",username="LuisHuergo",description="Argentino." ,gender="Hombre",looking_for="Mujer",education="Ingeniero civil",age=35),
+                 Profile(userid="2",username="ElisaBachofen",description="Argentina.",gender="Mujer",looking_for="Hombre",education="Ingeniera civil",age=30) ]
 
 router=APIRouter(tags=["profile"])
 

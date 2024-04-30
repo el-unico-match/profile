@@ -8,3 +8,5 @@ class Profile(BaseModel):
    description: str
    gender: str
    looking_for: str
+   age: int
+   education: str	

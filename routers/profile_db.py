@@ -4,7 +4,14 @@ from data.profile import Profile
 from bson import ObjectId
 
 def profile_schema(profile)-> dict:
-    return {"userid":profile["userid"],"username":profile["username"],"description":profile["description"],"gender":profile["gender"],"looking_for":profile["looking_for"]}
+    return {"userid":profile["userid"],
+	        "username":profile["username"],
+			"description":profile["description"],
+			"gender":profile["gender"],
+			"looking_for":profile["looking_for"],
+			"age":profile["age"],
+			"education":profile["education"]
+			}
 	
 router=APIRouter(tags=["profile_db"])
 
