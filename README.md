@@ -15,8 +15,8 @@
 | ethnicity   | string  |  
 
 # Ejemplo de un archivo json con datos del perfil de un usuario
-
-\{ "userid" : "66304a6b2891cdcfebdbdc6f",
+```
+{ "userid" : "66304a6b2891cdcfebdbdc6f",
    "username" : "Luis Huergo",
    "email" : "lhuergo@fi.uba.ar",
    "description" : "Estudié en la UBA",
@@ -25,8 +25,8 @@
    "age" : "33",
    "education" : "Ingeniero civil",
    "ethnicity" : ""
-\}
-
+}
+```
 # Instrucciones
 
 # Para iniciar el server: 
