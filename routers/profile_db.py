@@ -14,7 +14,14 @@ def profile_schema(profile)-> dict:
 			"education":profile["education"],
 	        "ethnicity":profile["ethnicity"]
 			}
-	
+
+def profiles_schema(profiles)-> list:
+   list=[]
+   for profile in profiles:
+       list.append(Profile(**profile_schema(profile)))
+   return list
+	    
+			
 router=APIRouter(tags=["profile_db"])
 
 # Para iniciar el server hacer: uvicorn profile_db:app --reload
@@ -25,6 +32,11 @@ router=APIRouter(tags=["profile_db"])
 # Url: http://127.0.0.1:8000/user/profile/{id} 
 
 # Operaciones de la API
+
+@router.get("/users/profiles/")
+async def view_profiles():
+    profiles = client_db.local.profiles.find()
+    return profiles_schema(profiles)
 
 @router.get("/user/profile/{id}",response_model=Profile)
 async def view_profile(id: str): 

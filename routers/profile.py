@@ -16,7 +16,11 @@ router=APIRouter(tags=["profile"])
 
 # Operaciones de la API
 
-@router.get("/user/profile/{id}",response_model=Profile)
+@router.get("/users/profiles/")
+async def view_profiles():
+   return profiles_list
+
+@router.get("/user/profile/{id}")
 async def view_profile(id: str): 
    profiles = filter(lambda profiles_list: profiles_list.userid==id,profiles_list)
    try:
