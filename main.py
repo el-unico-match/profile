@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from routers import profile,profile_db
+from routers import profile,profile_db,pictures_db
 
 from pydantic_settings import BaseSettings,SettingsConfigDict
 
@@ -28,6 +28,7 @@ if settings.disable_db==True:
 else:
    print("usa bd")
    app.include_router(profile_db.router)
+   app.include_router(pictures_db.router)
 
 # HTTP response
 # 100 información

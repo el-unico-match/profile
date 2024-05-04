@@ -87,7 +87,7 @@ async def update_profile(id: str,updated_profile:Profile):
    validar(updated_profile)	  
 
    updated_profile_dict=dict(updated_profile)
-   
+#   print(updated_profile_dict)
    found=client_db.local.profiles.find_one_and_replace({"userid":id},updated_profile_dict)
 
    if not found:
