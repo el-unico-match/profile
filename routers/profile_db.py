@@ -33,6 +33,10 @@ router=APIRouter(tags=["profile_db"])
 
 # Operaciones de la API
 
+@router.get("/user/profile/status")
+async def view_status(): 
+    return {"status":"ok"}
+
 @router.get("/users/profiles/")
 async def view_profiles():
     profiles = client_db.local.profiles.find()
@@ -54,7 +58,7 @@ def validar(profile: Profile):
    if profile.gender=="":
       raise HTTPException(status_code=400,detail="Falta indicar el genero")	 
 	   	  
-	  
+
 @router.post("/user/profile/")
 async def create_profile(new_profile:Profile):	 
 #   if new_profile.userid=="":
