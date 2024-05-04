@@ -10,7 +10,9 @@ class Settings(BaseSettings):
 	
 settings=Settings()	
 
-app=FastAPI()
+summary="Microservicio que se encarga de todo lo relativo a datos adicionales del usuario (como por ejemplo descripciones e imágenes)"
+
+app=FastAPI(title="perfil",version="1.0.0",summary=summary)
 
 # Para iniciar el server hacer: uvicorn main:app --reload
 
