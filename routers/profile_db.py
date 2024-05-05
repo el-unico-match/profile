@@ -33,16 +33,16 @@ router=APIRouter(tags=["profile_db"])
 
 # Operaciones de la API
 
-@router.get("/user/profile/status")
+@router.get("/user/profile/status",summary="Retorna el estado del servicio")
 async def view_status(): 
     return {"status":"ok"}
 
-@router.get("/users/profiles/")
+@router.get("/users/profiles/",summary="Retorna una lista con todos los perfiles")
 async def view_profiles():
     profiles = client_db.local.profiles.find()
     return profiles_schema(profiles)
 
-@router.get("/user/profile/{id}",response_model=Profile)
+@router.get("/user/profile/{id}",response_model=Profile,summary="Retorna el perfil solicitado")
 async def view_profile(id: str): 
    try:
       profile = client_db.local.profiles.find_one({"userid":id})
@@ -59,7 +59,7 @@ def validar(profile: Profile):
       raise HTTPException(status_code=400,detail="Falta indicar el genero")	 
 	   	  
 
-@router.post("/user/profile/")
+@router.post("/user/profile/",summary="Crea un nuevo perfil")
 async def create_profile(new_profile:Profile):	 
 #   if new_profile.userid=="":
 #      raise HTTPException(status_code=400,detail="Falta indicar el id de usuario")
@@ -79,7 +79,7 @@ async def create_profile(new_profile:Profile):
    client_db.local.profiles.insert_one(profile_dict)
 	  
 	  
-@router.put("/user/profile/{id}")
+@router.put("/user/profile/{id}",summary="Actualiza el perfil solicitado")
 async def update_profile(id: str,updated_profile:Profile):     
    if id!=updated_profile.userid:
       raise HTTPException(status_code=400,detail="El id de la ruta no coincide con el id del perfil") 
@@ -94,7 +94,7 @@ async def update_profile(id: str,updated_profile:Profile):
       raise HTTPException(status_code=404,detail="No existe el usuario")
   
 
-@router.delete("/user/profile/{id}")
+@router.delete("/user/profile/{id}",summary="Elimina el perfil solicitado")
 async def delete_profile(id: str): 
    
    found = client_db.local.profiles.find_one_and_delete({"userid":id})
