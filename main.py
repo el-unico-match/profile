@@ -1,13 +1,14 @@
 from fastapi import FastAPI
 from routers import profile,profile_db,pictures_db
+from settings import Settings
 
-from pydantic_settings import BaseSettings,SettingsConfigDict
+#from pydantic_settings import BaseSettings,SettingsConfigDict
 
-class Settings(BaseSettings):
-    disable_db:bool=False
-
-    model_config = SettingsConfigDict(env_file=".env")	
-	
+#class Settings(BaseSettings):
+#    disable_db:bool=False
+#
+#    model_config = SettingsConfigDict(env_file=".env")	
+#	
 settings=Settings()	
 
 summary="Microservicio que se encarga de todo lo relativo a datos adicionales del usuario (como por ejemplo descripciones e imágenes)"
