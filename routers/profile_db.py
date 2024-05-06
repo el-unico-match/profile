@@ -41,7 +41,7 @@ router=APIRouter(tags=["profile_db"])
 
 # Operaciones de la API
 
-@router.get("/user/profile/status",summary="Retorna el estado del servicio")
+@router.get("/status",summary="Retorna el estado del servicio")
 async def view_status(): 
     logger.info("retornando status")
     return {"status":"ok"}
@@ -62,7 +62,7 @@ async def view_profile(id: str):
       logger.error(str(e))
       raise HTTPException(status_code=404,detail="No se ha encontrado el usuario")
 
-def validar(profile: Profile):	
+def validate(profile: Profile):	
    logger.info("validando campos del perfil")   
    if profile.userid=="":
       logger.error("Falta indicar el id de usuario")     
@@ -85,7 +85,7 @@ async def create_profile(new_profile:Profile):
 #      raise HTTPException(status_code=400,detail="Falta indicar el genero")	 
    logger.info("creando el perfil") 
    
-   validar(new_profile)
+   validate(new_profile)
 
    logger.info("chequeando si ya existe el perfil")   
    found=client_db.local.profiles.find_one({"userid":new_profile.userid})
@@ -107,7 +107,7 @@ async def update_profile(id: str,updated_profile:Profile):
       logger.error("El id de la ruta no coincide con el id del perfil")         
       raise HTTPException(status_code=400,detail="El id de la ruta no coincide con el id del perfil") 
 
-   validar(updated_profile)	  
+   validate(updated_profile)	  
 
    updated_profile_dict=dict(updated_profile)
 #   print(updated_profile_dict)

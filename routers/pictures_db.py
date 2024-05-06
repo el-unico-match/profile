@@ -22,12 +22,12 @@ router=APIRouter(tags=["pictures_db"])
 
 @router.post("/user/profile/pictures")
 async def create_pictures(new_pictures:Pictures):	 
-   found=client_db.local.pictures.find_one({"userid":new_pictures.userid})
+   found=client_db.local.pictures_albums.find_one({"userid":new_pictures.userid})
    
    if found:
       raise HTTPException(status_code=400,detail="El usuario ya existe")        
    
    pictures_dict=pictures_schema(new_pictures)
 #   print("pictures_dict:"+str(pictures_dict))
-   client_db.local.pictures.insert_one(pictures_dict)
+   client_db.local.pictures_albums.insert_one(pictures_dict)
 
