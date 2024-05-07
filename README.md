@@ -1,5 +1,7 @@
 # profile
 
+> versión actual 0.0.1
+
 # Esquema de los datos de perfil
 
 | Campo       | Tipo    |
