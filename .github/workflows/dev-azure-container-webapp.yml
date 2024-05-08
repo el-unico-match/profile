@@ -30,7 +30,14 @@ jobs:
       - name: Create Environment File
         run: |
           echo "DISABLE_DB=${{ vars.DISABLE_DB }}" > .env
-          echo "DB_HOST=${{ vars.DB_HOST  }}" >> .env
+          echo "LOG_FILENAME=${{ vars.LOG_FILENAME  }}" >> .env
+          echo "NOTSET=${{ vars.NOTSET  }}" >> .env
+          echo "DEBUG=${{ vars.DEBUG  }}" >> .env
+          echo "INFO=${{ vars.INFO  }}" >> .env
+          echo "ERROR=${{ vars.ERROR  }}" >> .env
+          echo "CRITICAL=${{ vars.CRITICAL  }}" >> .env
+          echo "LOGGING_LEVEL=${{ vars.LOGGING_LEVEL  }}" >> .env
+          echo "DB_DOMAIN =${{ vars.DB_DOMAIN   }}" >> .env
           echo "DB_PORT=${{ vars.DB_PORT  }}" >> .env
 
       - name: Build and push container image to registry
