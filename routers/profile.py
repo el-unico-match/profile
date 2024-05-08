@@ -2,8 +2,8 @@ from fastapi import APIRouter,HTTPException
 from data.profile import Profile
 
 # Sustituto provisorio de base de datos con los perfiles
-profiles_list = [Profile(userid="1",username="LuisHuergo",description="Argentino. Ingeniero civil",gender="Hombre",looking_for="Mujer"),
-                 Profile(userid="2",username="ElisaBachofen",description="Argentina. Ingeniera civil",gender="Mujer",looking_for="Hombre") ]
+profiles_list = [Profile(userid="1",username="LuisHuergo",email="lhuergo@fi.uba.ar",description="Argentino." ,gender="Hombre",looking_for="Mujer",education="Ingeniero civil",age=35,ethnicity=""),
+                 Profile(userid="2",username="ElisaBachofen",email="ebachofen@fi.uba.ar",description="Argentina.",gender="Mujer",looking_for="Hombre",education="Ingeniera civil",age=30,ethnicity="") ]
 
 router=APIRouter(tags=["profile"])
 
@@ -16,7 +16,15 @@ router=APIRouter(tags=["profile"])
 
 # Operaciones de la API
 
-@router.get("/user/profile/{id}",response_model=Profile)
+@router.get("/user/profile/status")
+async def view_status(): 
+    return {"status":"ok"}
+
+@router.get("/users/profiles/")
+async def view_profiles():
+   return profiles_list
+
+@router.get("/user/profile/{id}")
 async def view_profile(id: str): 
    profiles = filter(lambda profiles_list: profiles_list.userid==id,profiles_list)
    try:

@@ -5,6 +5,10 @@ from typing import Optional
 class Profile(BaseModel):
    userid: str
    username: str
+   email: str
    description: str
    gender: str
    looking_for: str
+   age: int
+   education: str
+   ethnicity: str   

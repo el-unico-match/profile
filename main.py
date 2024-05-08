@@ -1,16 +1,19 @@
 from fastapi import FastAPI
-from routers import profile,profile_db
+from routers import profile,profile_db,pictures_db
+from settings import Settings
 
-from pydantic_settings import BaseSettings,SettingsConfigDict
+#from pydantic_settings import BaseSettings,SettingsConfigDict
 
-class Settings(BaseSettings):
-    disable_db:bool=False
-
-    model_config = SettingsConfigDict(env_file=".env")	
-	
+#class Settings(BaseSettings):
+#    disable_db:bool=False
+#
+#    model_config = SettingsConfigDict(env_file=".env")	
+#	
 settings=Settings()	
 
-app=FastAPI()
+summary="Microservicio que se encarga de todo lo relativo a datos adicionales del usuario (como por ejemplo descripciones e imágenes)"
+
+app=FastAPI(title="perfil",version="0.0.1",summary=summary)
 
 # Para iniciar el server hacer: uvicorn main:app --reload
 
@@ -26,6 +29,7 @@ if settings.disable_db==True:
 else:
    print("usa bd")
    app.include_router(profile_db.router)
+   app.include_router(pictures_db.router)
 
 # HTTP response
 # 100 información
