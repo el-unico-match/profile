@@ -1,9 +1,9 @@
-#from settings import Settings
+from settings import Settings
 from pymongo import MongoClient
 #import logging
 #import sys
 
-#settings=Settings()	
+settings=Settings()	
 
 #logging.basicConfig(filename=settings.log_filename)
 #logging.basicConfig()
@@ -15,5 +15,8 @@ from pymongo import MongoClient
 #stream_handler.setFormatter(log_formatter)
 #logger.addHandler(stream_handler)
 
+#host = settings.domain+":"+str(settings.port)
 
-client_db = MongoClient()
+client_db = MongoClient(host=settings.db_domain,port=settings.db_port)
+#client_db = MongoClient()
+print(client_db.host)

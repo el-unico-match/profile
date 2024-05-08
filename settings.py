@@ -2,6 +2,7 @@ from pydantic_settings import BaseSettings,SettingsConfigDict
 
 class Settings(BaseSettings):
     disable_db:bool=False
+	
     log_filename:str='profile.log'
     NOTSET:int=0
     DEBUG:int=10
@@ -10,5 +11,8 @@ class Settings(BaseSettings):
     ERROR:int=40
     CRITICAL:int=50	
     logging_level:int=DEBUG
+	
+    db_domain:str = 'localhost'
+    db_port:int = 8000
 	
     model_config = SettingsConfigDict(env_file=".env")	

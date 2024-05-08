@@ -34,3 +34,14 @@ INFO:routers.profile_db:actualizando el perfil en base de datos
 INFO:routers.profile_db:eliminando el perfil
 ERROR:routers.profile_db:el usuario no existe
 INFO:routers.profile_db:eliminando el perfil
+INFO:routers.profile_db:retornando status
+INFO:routers.profile_db:buscando todos los perfiles
+INFO:routers.profile_db:retornando status
+INFO:routers.profile_db:buscando todos los perfiles
+INFO:routers.profile_db:buscando el perfil asociado al id de usuario:1
+INFO:routers.profile_db:retornando status
+INFO:routers.profile_db:buscando el perfil asociado al id de usuario:1
+INFO:routers.profile_db:retornando status
+INFO:routers.profile_db:buscando el perfil asociado al id de usuario:1
+INFO:routers.profile_db:retornando status
+INFO:routers.profile_db:buscando el perfil asociado al id de usuario:1
