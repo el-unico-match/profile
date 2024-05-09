@@ -13,6 +13,6 @@ class Settings(BaseSettings):
     logging_level:int=DEBUG
 	
     db_domain:str = 'localhost'
-    db_port:int = 8000
+    db_port:int = 5000
 	
     model_config = SettingsConfigDict(env_file=".env")	
