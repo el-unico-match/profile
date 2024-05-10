@@ -10,6 +10,7 @@ COPY routers/ routers/
 # Copies files into workdir
 COPY .env /
 COPY main.py /
+COPY settings.py /
 COPY requirements.txt /
 
 # Builds python solution

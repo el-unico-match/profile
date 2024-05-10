@@ -1,0 +1,18 @@
+version: "2.2"
+
+services:  
+  profile_app:
+    build: .
+#    env_file:
+#      - .dev.env
+    ports:
+      - "5000:5000"
+    depends_on:
+      - profile_mongo
+  profile_mongo:
+    image: mongo:4.4.6
+#    container_name: "mongo2"
+    ports:
+      - 27017:27017
+#    volumes:
+#      - ./test-docker-entrypoint-initdb.d/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
