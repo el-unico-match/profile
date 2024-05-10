@@ -31,7 +31,7 @@
 ```
 # Seteo de variables de entorno para usar en local:
 
-  DISABLE_DB=False\
+  DISABLE_DB=False
 
   LOG_FILENAME='profile.log'\
   NOTSET=0\
@@ -40,16 +40,16 @@
   WARNING=30\
   ERROR=40\
   CRITICAL=50\
-  LOGGING_LEVEL=${DEBUG}\
+  LOGGING_LEVEL=${DEBUG}
 
   DOCKER_DOMAIN='profile_mongo'\
   LOCAL_DOMAIN='localhost'\
   **DB_DOMAIN =${LOCAL_DOMAIN}**\
-  DB_PORT = 27017\
+  DB_PORT = 27017
 
 # Seteo de variables de entorno para usar en docker:
 
-  DISABLE_DB=False\
+  DISABLE_DB=False
 
   LOG_FILENAME='profile.log'\
   NOTSET=0\
@@ -58,12 +58,12 @@
   WARNING=30\
   ERROR=40\
   CRITICAL=50\
-  LOGGING_LEVEL=${DEBUG}\
+  LOGGING_LEVEL=${DEBUG}
 
   DOCKER_DOMAIN='profile_mongo'\
   LOCAL_DOMAIN='localhost'\
   **DB_DOMAIN =${DOCKER_DOMAIN}**\
-  DB_PORT = 27017\
+  DB_PORT = 27017
 
 # Instrucciones
 
