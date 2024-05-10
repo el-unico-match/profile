@@ -37,7 +37,9 @@ jobs:
           echo "ERROR=${{ vars.ERROR  }}" >> .env
           echo "CRITICAL=${{ vars.CRITICAL  }}" >> .env
           echo "LOGGING_LEVEL=${{ vars.LOGGING_LEVEL  }}" >> .env
-          echo "DB_DOMAIN =${{ vars.DB_DOMAIN   }}" >> .env
+          echo "DOCKER_DOMAIN =${{ vars.DOCKER_DOMAIN   }}" >> .env
+          echo "LOCAL_DOMAIN=${{ vars.LOCAL_DOMAIN  }}" >> .env
+          echo "DB_DOMAIN =${{ vars.DOCKER_DOMAIN   }}" >> .env  
           echo "DB_PORT=${{ vars.DB_PORT  }}" >> .env
 
       - name: Build and push container image to registry
