@@ -13,7 +13,7 @@ settings=Settings()
 
 summary="Microservicio que se encarga de todo lo relativo a datos adicionales del usuario (como por ejemplo descripciones e imágenes)"
 
-app=FastAPI(title="perfil",version="0.0.1",summary=summary)
+app=FastAPI(title="perfil",version="0.0.2",summary=summary)
 
 # Para iniciar el server hacer: uvicorn main:app --reload
 

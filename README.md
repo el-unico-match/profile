@@ -1,6 +1,6 @@
 # profile
 
-> versión actual 0.0.1
+> versión actual 0.0.2
 
 # Esquema de los datos de perfil
 
