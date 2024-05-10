@@ -33,7 +33,7 @@
 
 DISABLE_DB=False
 
-#logger
+\#logger
 LOG_FILENAME='profile.log'
 NOTSET=0
 DEBUG=10
@@ -43,7 +43,7 @@ ERROR=40
 CRITICAL=50
 LOGGING_LEVEL=${DEBUG}
 
-#base de datos
+\#base de datos
 DOCKER_DOMAIN='profile_mongo'
 LOCAL_DOMAIN='localhost'
 **DB_DOMAIN =${LOCAL_DOMAIN}**
@@ -53,7 +53,7 @@ DB_PORT = 27017
 
 DISABLE_DB=False
 
-#logger
+\#logger
 LOG_FILENAME='profile.log'
 NOTSET=0
 DEBUG=10
@@ -63,7 +63,7 @@ ERROR=40
 CRITICAL=50
 LOGGING_LEVEL=${DEBUG}
 
-#base de datos
+\#base de datos
 DOCKER_DOMAIN='profile_mongo'
 LOCAL_DOMAIN='localhost'
 **DB_DOMAIN =${DOCKER_DOMAIN}**
