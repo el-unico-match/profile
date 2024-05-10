@@ -16,7 +16,7 @@ def pictures_schema(pictures)-> dict:
        list.append(picture_schema(picture))
    return {"userid":pictures.userid,"pictures":list}
 
-router=APIRouter(tags=["pictures_db"])
+router=APIRouter(tags=["pictures"])
 
 # Operaciones de la API
 

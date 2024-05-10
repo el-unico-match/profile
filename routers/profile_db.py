@@ -30,7 +30,7 @@ def profiles_schema(profiles)-> list:
    return list
 	    
 			
-router=APIRouter(tags=["profile_db"])
+router=APIRouter(tags=["profile"])
 
 # Para iniciar el server hacer: uvicorn profile_db:app --reload
 
