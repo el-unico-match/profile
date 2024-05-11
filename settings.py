@@ -16,5 +16,6 @@ class Settings(BaseSettings):
     LOCAL_DOMAIN:str='localhost'
     db_domain:str = LOCAL_DOMAIN
     db_port:int = 5000
+    db_host:str=db_domain+":"+str(db_port)
 	
     model_config = SettingsConfigDict(env_file=".env")	

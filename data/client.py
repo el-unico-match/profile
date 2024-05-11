@@ -17,6 +17,7 @@ settings=Settings()
 
 #host = settings.domain+":"+str(settings.port)
 
-client_db = MongoClient(host=settings.db_domain,port=settings.db_port)
+#client_db = MongoClient(host=settings.db_domain,port=settings.db_port)
 #client_db = MongoClient()
+client_db = MongoClient(host=settings.db_host)
 print(client_db.host)
