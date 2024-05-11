@@ -22,19 +22,19 @@ router=APIRouter(tags=["pictures"])
 
 @router.post("/user/profile/pictures")
 async def create_pictures(new_pictures:Pictures):	 
-   found=client_db.local.pictures_albums.find_one({"userid":new_pictures.userid})
+   found=client_db.pictures_albums.find_one({"userid":new_pictures.userid})
    
    if found:
       raise HTTPException(status_code=400,detail="El usuario ya existe")        
    
    pictures_dict=pictures_schema(new_pictures)
 #   print("pictures_dict:"+str(pictures_dict))
-   client_db.local.pictures_albums.insert_one(pictures_dict)
+   client_db.pictures_albums.insert_one(pictures_dict)
    
    
 @router.put("/user/profile/pictures/{id}/{name}")
 async def add_picture(id: str,name:str,new_picture:Picture):     
-   pictures_album = client_db.local.pictures_albums.find_one({"userid":id})
+   pictures_album = client_db.pictures_albums.find_one({"userid":id})
    
    if not pictures_album:
       raise HTTPException(status_code=404,detail="No se ha encontrado el usuario")
@@ -42,7 +42,7 @@ async def add_picture(id: str,name:str,new_picture:Picture):
    new_picture_dict=dict(new_picture)	  
    pictures_album["pictures"].append(new_picture_dict)   
 #   del pictures_album["_id"]
-   found=client_db.local.pictures_albums.find_one_and_replace({"userid":id},pictures_album)  
+   found=client_db.pictures_albums.find_one_and_replace({"userid":id},pictures_album)  
 	
    if not found:
 #      logger.error("el usuario no existe")      

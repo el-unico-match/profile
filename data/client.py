@@ -19,5 +19,6 @@ settings=Settings()
 
 #client_db = MongoClient(host=settings.db_domain,port=settings.db_port)
 #client_db = MongoClient()
-client_db = MongoClient(host=settings.db_host)
-print(client_db.host)
+client = MongoClient(host=settings.db_host)
+client_db = client[settings.db_name]
+print(client.host)
