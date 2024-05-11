@@ -41,7 +41,9 @@ jobs:
           echo "LOCAL_DOMAIN=${{ vars.LOCAL_DOMAIN  }}" >> .env
           echo "DB_DOMAIN =${{ vars.DOCKER_DOMAIN   }}" >> .env  
           echo "DB_PORT=${{ vars.DB_PORT  }}" >> .env
-          echo "DB_HOST=${{ vars.DB_HOST  }}" >> .env          
+          echo "DB_HOST=${{ vars.DB_HOST  }}" >> .env
+          echo "LOCAL_DB_NAME=${{ vars.LOCAL_DB_NAME  }}" >> .env             
+          echo "DB_NAME=${{ vars.DB_NAME  }}" >> .env             
 
       - name: Build and push container image to registry
         uses: docker/build-push-action@0565240e2d4ab88bba5387d719585280857ece09 # v5.0.0
