@@ -30,7 +30,7 @@ def profiles_schema(profiles)-> list:
    return list
 	    
 			
-router=APIRouter(tags=["profile_db"])
+router=APIRouter(tags=["profile"])
 
 # Para iniciar el server hacer: uvicorn profile_db:app --reload
 
@@ -49,14 +49,14 @@ async def view_status():
 @router.get("/users/profiles/",summary="Retorna una lista con todos los perfiles")
 async def view_profiles():
     logger.info("buscando todos los perfiles")
-    profiles = client_db.local.profiles.find()
+    profiles = client_db.profiles.find()
     return profiles_schema(profiles)
 
 @router.get("/user/profile/{id}",response_model=Profile,summary="Retorna el perfil solicitado")
 async def view_profile(id: str): 
    logger.info("buscando el perfil asociado al id de usuario:"+id) 
    try:
-      profile = client_db.local.profiles.find_one({"userid":id})
+      profile = client_db.profiles.find_one({"userid":id})
       return Profile(**profile_schema(profile)) 	  
    except Exception as e:
       logger.error(str(e))
@@ -88,7 +88,7 @@ async def create_profile(new_profile:Profile):
    validate(new_profile)
 
    logger.info("chequeando si ya existe el perfil")   
-   found=client_db.local.profiles.find_one({"userid":new_profile.userid})
+   found=client_db.profiles.find_one({"userid":new_profile.userid})
    
    if found:
       logger.error("el usuario ya existe")   
@@ -96,7 +96,7 @@ async def create_profile(new_profile:Profile):
    
    profile_dict=dict(new_profile)
    logger.info("creando el perfil en base de datos")     
-   client_db.local.profiles.insert_one(profile_dict)
+   client_db.profiles.insert_one(profile_dict)
 	  
 	  
 @router.put("/user/profile/{id}",summary="Actualiza el perfil solicitado")
@@ -112,7 +112,7 @@ async def update_profile(id: str,updated_profile:Profile):
    updated_profile_dict=dict(updated_profile)
 #   print(updated_profile_dict)
    logger.info("actualizando el perfil en base de datos")
-   found=client_db.local.profiles.find_one_and_replace({"userid":id},updated_profile_dict)
+   found=client_db.profiles.find_one_and_replace({"userid":id},updated_profile_dict)
 
    if not found:
       logger.error("el usuario no existe")      
@@ -123,7 +123,7 @@ async def update_profile(id: str,updated_profile:Profile):
 async def delete_profile(id: str): 
 
    logger.info("eliminando el perfil asociado al id de usuario:"+id)   
-   found = client_db.local.profiles.find_one_and_delete({"userid":id})
+   found = client_db.profiles.find_one_and_delete({"userid":id})
 
    if not found:
       logger.error("el usuario no existe")    

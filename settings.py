@@ -12,7 +12,13 @@ class Settings(BaseSettings):
     CRITICAL:int=50	
     logging_level:int=DEBUG
 	
-    db_domain:str = 'localhost'
-    db_port:int = 8000
+    DOCKER_DOMAIN:str='profile_mongo'
+    LOCAL_DOMAIN:str='localhost'
+    db_domain:str = LOCAL_DOMAIN
+    db_port:int = 5000
+    db_host:str=db_domain+":"+str(db_port)
+    local_db_name:str='local'
+    remote_db_name:str='remote'	
+    db_name:str=local_db_name
 	
     model_config = SettingsConfigDict(env_file=".env")	
