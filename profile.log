@@ -46,3 +46,4 @@ INFO:routers.profile_db:buscando el perfil asociado al id de usuario:1
 INFO:routers.profile_db:retornando status
 INFO:routers.profile_db:buscando el perfil asociado al id de usuario:1
 INFO:routers.profile_db:retornando status
+INFO:routers.profile_db:buscando todos los perfiles
