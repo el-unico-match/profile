@@ -20,7 +20,7 @@ router=APIRouter(tags=["profile"])
 async def view_status(): 
     return {"status":"ok"}
 
-@router.get("/users/profiles/")
+@router.get("/users/profiles")
 async def view_profiles():
    return profiles_list
 
@@ -40,7 +40,7 @@ def validar(profile: Profile):
    if profile.gender=="":
       raise HTTPException(status_code=400,detail="Falta indicar el genero")	 
 	   
-@router.post("/user/profile/")
+@router.post("/user/profile")
 async def create_profile(new_profile: Profile):
 #   if id!=new_profile.userid:
 #      raise HTTPException(status_code=400,detail="El id de la ruta no coincide con el id del perfil")    
