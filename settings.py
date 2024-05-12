@@ -18,6 +18,7 @@ class Settings(BaseSettings):
     db_port:int = 5000
     db_host:str=db_domain+":"+str(db_port)
     local_db_name:str='local'
+    remote_db_name:str='remote'	
     db_name:str=local_db_name
 	
     model_config = SettingsConfigDict(env_file=".env")	

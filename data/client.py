@@ -21,4 +21,4 @@ settings=Settings()
 #client_db = MongoClient()
 client = MongoClient(host=settings.db_host)
 client_db = client[settings.db_name]
-print(client.host)
+#print(client.host)
