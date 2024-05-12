@@ -1,6 +1,6 @@
 # profile
 
-> versión actual 0.0.2
+> versión actual 0.0.3
 
 # Esquema de los datos de perfil
 
@@ -24,7 +24,7 @@
    "description" : "Estudié en la UBA",
    "gender" : "Hombre",
    "looking_for" : "Mujer",
-   "age" : "33",
+   "age" : 33,
    "education" : "Ingeniero civil",
    "ethnicity" : ""
 }
