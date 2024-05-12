@@ -41,7 +41,7 @@ jobs:
           echo "LOCAL_DOMAIN=${{ vars.LOCAL_DOMAIN  }}" >> .env
           echo "DB_DOMAIN =${{ vars.DOCKER_DOMAIN   }}" >> .env  
           echo "DB_PORT=${{ vars.DB_PORT  }}" >> .env
-          echo "DB_HOST=${{ vars.DB_HOST  }}" >> .env          
+          echo "DB_HOST=${{ secrets.DB_CNN  }}" >> .env         
           echo "LOCAL_DB_NAME=${{ vars.LOCAL_DB_NAME  }}" >> .env   
           echo "REMOTE_DB_NAME=${{ vars.REMOTE_DB_NAME  }}" >> .env           
           echo "DB_NAME=${{ vars.DB_NAME  }}" >> .env            
