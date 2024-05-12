@@ -46,7 +46,7 @@ async def view_status():
     logger.info("retornando status")
     return {"status":"ok"}
 
-@router.get("/users/profiles/",summary="Retorna una lista con todos los perfiles")
+@router.get("/users/profiles",summary="Retorna una lista con todos los perfiles")
 async def view_profiles():
     logger.info("buscando todos los perfiles")
     profiles = client_db.profiles.find()
@@ -75,7 +75,7 @@ def validate(profile: Profile):
       raise HTTPException(status_code=400,detail="Falta indicar el genero")	 
 	   	  
 
-@router.post("/user/profile/",summary="Crea un nuevo perfil")
+@router.post("/user/profile",summary="Crea un nuevo perfil")
 async def create_profile(new_profile:Profile):	 
 #   if new_profile.userid=="":
 #      raise HTTPException(status_code=400,detail="Falta indicar el id de usuario")
