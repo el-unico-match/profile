@@ -37,7 +37,7 @@ async def create_pictures(new_pictures:Pictures):
 
 @router.get("/user/profile/pictures/{id}")
 async def view_pictures(id: str): 
-#   logger.info("buscando el perfil asociado al id de usuario:"+id) 
+#   logger.info("buscando el imágenes") 
    try:
       pictures_album = client_db.pictures_albums.find_one({"userid":id})
 #      print(   pictures_album["pictures"])
@@ -64,64 +64,9 @@ async def update_pictures(id: str,new_pictures:Pictures):
 #   print(type(new_pictures)) 
    new_pictures_dict=pictures_schema(new_pictures)
 #   print(new_pictures_dict)
-#   logger.info("actualizando el perfil en base de datos")
+#   logger.info("actualizando las imágenes en base de datos")
    found=client_db.pictures_albums.find_one_and_replace({"userid":id},new_pictures_dict)
 
    if not found:
 #      logger.error("el usuario no existe")      
       raise HTTPException(status_code=404,detail="No existe el usuario")   
-   
-"""   
-@router.post("/user/profile/pictures/{id}/{name}")
-async def add_picture(id: str,name:str,new_picture:Picture):     
-   pictures_album = client_db.pictures_albums.find_one({"userid":id})
-   
-   if not pictures_album:
-      raise HTTPException(status_code=404,detail="No se ha encontrado el usuario")
-
-   new_picture_dict=dict(new_picture)	  
-   pictures_album["pictures"].append(new_picture_dict)   
-#   del pictures_album["_id"]
-   found=client_db.pictures_albums.find_one_and_replace({"userid":id},pictures_album)  
-	
-   if not found:
-#      logger.error("el usuario no existe")      
-      raise HTTPException(status_code=404,detail="No existe el usuario")
-   
-#	pictures_album.append(new_picture)   
-
-@router.put("/user/profile/pictures/{id}/{name}")
-async def replace_picture(id: str,name:str,new_picture:Picture):     
-   pictures_album = client_db.pictures_albums.find_one({"userid":id})
-   
-   if not pictures_album:
-      raise HTTPException(status_code=404,detail="No se ha encontrado el usuario")
-
-   new_picture_dict=dict(new_picture)	  
-   
-   pictures=pictures_album["pictures"]
-   
-   index=find_index(pictures,name)   
-   
-   if not index:
-      raise HTTPException(status_code=404,detail="No existe la foto")    
-
-#   print("intenta reemplazar en la lista de fotos")	  
-   pictures[index]=new_picture_dict   
-#   del pictures_album["_id"]
-#   print("intenta reemplazar en la base de datos")
-   found=client_db.pictures_albums.find_one_and_replace({"userid":id},pictures_album)  
-#   print("reemplazo en la base de datos")
-   
-   if not found:
-#      logger.error("el usuario no existe")      
-      raise HTTPException(status_code=404,detail="No existe el usuario")
-
-
-def find_index(pictures,name):
-   index=None 
-   for index,picture in enumerate(pictures):
-      if picture["name"] == name:
-         return index      	
-   return None
-"""   
