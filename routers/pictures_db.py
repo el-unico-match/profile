@@ -4,19 +4,19 @@ from data.pictures import Picture,Pictures
 from bson import ObjectId
 
 def picture_schema(picture)-> dict:
-    return {"name":picture["name"],
-         	"url":picture["url"],
-	        "order":picture["order"]
+    return {"name":picture.name,
+         	"url":picture.url,
+	        "order":picture.order
 			}
 
 def pictures_schema(pictures)-> dict:
 #   print("pictures"+str(pictures))
    list=[]
-   for picture in pictures["pictures"]:
+   for picture in pictures.pictures:
 #       print("itera")
 #       list.append(Picture(**picture_schema(picture)))
        list.append(picture_schema(picture))
-   return {"userid":pictures["userid"],"pictures":list}
+   return {"userid":pictures.userid,"pictures":list}
 
 router=APIRouter(tags=["pictures"])
 
@@ -28,6 +28,8 @@ async def create_pictures(new_pictures:Pictures):
    
    if found:
       raise HTTPException(status_code=400,detail="El usuario ya existe")        
+
+   print(type(new_pictures)) 
    
    pictures_dict=pictures_schema(new_pictures)
 #   print("pictures_dict:"+str(pictures_dict))
@@ -42,11 +44,13 @@ async def view_pictures(id: str):
 #      pictures=pictures_album["pictures"]
 #      print(pictures_album)
 #      print(type({"pictures":pictures}))
-      return pictures_schema(pictures_album)
+
+#      print(type(pictures_album)) 
+      return Pictures(**pictures_album)
 	  #return Pictures(**pictures_schema({"pictures":pictures})) 	  
    except Exception as e:
 #      logger.error(str(e))
-#      print(e)
+      print(e)
       raise HTTPException(status_code=404,detail="No se ha encontrado el usuario")   
    
 @router.put("/user/profile/pictures/{id}")
@@ -57,8 +61,9 @@ async def update_pictures(id: str,new_pictures:Pictures):
 #      logger.error("El id de la ruta no coincide con el id del perfil")         
       raise HTTPException(status_code=400,detail="El id de la ruta no coincide con el id del perfil") 
 
+#   print(type(new_pictures)) 
    new_pictures_dict=pictures_schema(new_pictures)
-   print(new_pictures_dict)
+#   print(new_pictures_dict)
 #   logger.info("actualizando el perfil en base de datos")
    found=client_db.pictures_albums.find_one_and_replace({"userid":id},new_pictures_dict)
 
