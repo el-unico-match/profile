@@ -42,6 +42,20 @@
    "ethnicity" : ""
 }
 ```
+# Ejemplo de un archivo json con datos de imágenes de un usuario
+```
+{
+  "userid": "1",
+  "pictures": [
+    {
+      "name": "foto1.jpg",
+      "url": "myurl/foto1.jpg",
+      "order": 0
+    }
+  ]
+}
+```
+
 # Seteo de variables de entorno para usar en local:
 
   DISABLE_DB=False
