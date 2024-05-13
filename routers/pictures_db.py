@@ -4,17 +4,19 @@ from data.pictures import Picture,Pictures
 from bson import ObjectId
 
 def picture_schema(picture)-> dict:
-    return {"name":picture.name,
-         	"url":picture.url,
-	        "order":picture.order
+    return {"name":picture["name"],
+         	"url":picture["url"],
+	        "order":picture["order"]
 			}
 
 def pictures_schema(pictures)-> dict:
+#   print("pictures"+str(pictures))
    list=[]
-   for picture in pictures.pictures:
+   for picture in pictures["pictures"]:
+#       print("itera")
 #       list.append(Picture(**picture_schema(picture)))
        list.append(picture_schema(picture))
-   return {"userid":pictures.userid,"pictures":list}
+   return {"userid":pictures["userid"],"pictures":list}
 
 router=APIRouter(tags=["pictures"])
 
@@ -31,6 +33,22 @@ async def create_pictures(new_pictures:Pictures):
 #   print("pictures_dict:"+str(pictures_dict))
    client_db.pictures_albums.insert_one(pictures_dict)
 
+@router.get("/user/profile/pictures/{id}")
+async def view_pictures(id: str): 
+#   logger.info("buscando el perfil asociado al id de usuario:"+id) 
+   try:
+      pictures_album = client_db.pictures_albums.find_one({"userid":id})
+#      print(   pictures_album["pictures"])
+#      pictures=pictures_album["pictures"]
+#      print(pictures_album)
+#      print(type({"pictures":pictures}))
+      return pictures_schema(pictures_album)
+	  #return Pictures(**pictures_schema({"pictures":pictures})) 	  
+   except Exception as e:
+#      logger.error(str(e))
+#      print(e)
+      raise HTTPException(status_code=404,detail="No se ha encontrado el usuario")   
+   
 @router.put("/user/profile/pictures/{id}")
 async def update_pictures(id: str,new_pictures:Pictures):     
 #   logger.info("actualizando el perfil")
