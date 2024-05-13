@@ -1,6 +1,16 @@
 # profile
 
-> versión actual 0.0.3
+> versión actual 0.0.4
+> Funcionalidades actuales:
+> Creación de nuevo perfil
+> Actualización de perfil solicitado
+> Consulta de perfil solicitado
+> Consulta de todos los perfiles
+> Eliminación de perfil solicitado
+> Consulta del estado del servicio 
+> Creación de imágenes de perfil
+> Actualización de imágenes de perfil
+> Consulta de imágenes de perfil solicitado
 
 # Esquema de los datos de perfil
 
