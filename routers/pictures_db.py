@@ -40,10 +40,6 @@ async def view_pictures(id: str):
 #   logger.info("buscando el imágenes") 
    try:
       pictures_album = client_db.pictures_albums.find_one({"userid":id})
-#      print(   pictures_album["pictures"])
-#      pictures=pictures_album["pictures"]
-#      print(pictures_album)
-#      print(type({"pictures":pictures}))
 
 #      print(type(pictures_album)) 
       return Pictures(**pictures_album)
@@ -55,7 +51,7 @@ async def view_pictures(id: str):
    
 @router.put("/user/profile/pictures/{id}")
 async def update_pictures(id: str,new_pictures:Pictures):     
-#   logger.info("actualizando el perfil")
+#   logger.info("actualizando el imágenes")
    
    if id!=new_pictures.userid:
 #      logger.error("El id de la ruta no coincide con el id del perfil")         
