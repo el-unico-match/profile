@@ -15,6 +15,19 @@
 > Actualización de imágenes de perfil solicitado\
 > Consulta de imágenes de perfil solicitado
 
+| Operación                                       | Retorna           | HTTP request                                                                             |
+|-------------------------------------------------|-------------------|------------------------------------------------------------------------------------------|
+| Retornar el estado del servicio                 | Estado            | GET https://profile-uniquegroup-match-fiuba.azurewebsites.net/status                     |
+| Retornar una lista con todos los perfiles lista | Lista de perfiles | GET https://profile-uniquegroup-match-fiuba.azurewebsites.net/users/profiles             |
+| Retornar el perfil solicitado                   | Perfil            | GET https://profile-uniquegroup-match-fiuba.azurewebsites.net/user/profile/{id}          |
+| Actualizar el perfil solicitado                 | Nada              | PUT https://profile-uniquegroup-match-fiuba.azurewebsites.net/user/profile/{id}          |
+| Eliminar el perfil solicitado                   | Nada              | DELETE https://profile-uniquegroup-match-fiuba.azurewebsites.net/user/profile/{id}       |
+| Crear el perfil solicitado                      | Nada              | POST https://profile-uniquegroup-match-fiuba.azurewebsites.net/user/profile              |
+|                                                 |                   |                                                                                          |
+| Crear imágenes de perfil                        | Nada              | POST https://profile-uniquegroup-match-fiuba.azurewebsites.net/user/profile/pictures     |
+| Retornar las imágenes del perfil solicitado     | Imágenes          | GET https://profile-uniquegroup-match-fiuba.azurewebsites.net/user/profile/pictures/{id} |
+| Actualizar las imágenes del perfil solicitado   | Nada              | PUT https://profile-uniquegroup-match-fiuba.azurewebsites.net/user/profile/pictures/{id} |
+
 # Esquema de los datos de perfil
 
 | Campo       | Tipo    |
