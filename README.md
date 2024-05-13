@@ -1,8 +1,9 @@
 # profile
 
-> versión actual 0.0.4\
+> __versión actual:__\
+> 0.0.4\
 > \
-> Funcionalidades actuales:\
+> __Funcionalidades actuales:__\
 > \
 > Creación de nuevo perfil\
 > Actualización de perfil solicitado\
@@ -11,7 +12,7 @@
 > Eliminación de perfil solicitado\
 > Consulta del estado del servicio\
 > Creación de imágenes de perfil\
-> Actualización de imágenes de perfil\
+> Actualización de imágenes de perfil solicitado\
 > Consulta de imágenes de perfil solicitado
 
 # Esquema de los datos de perfil
