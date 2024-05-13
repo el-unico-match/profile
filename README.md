@@ -1,6 +1,19 @@
 # profile
 
-> versión actual 0.0.3
+> __versión actual:__\
+> 0.0.4\
+> \
+> __Funcionalidades actuales:__\
+> \
+> Creación de nuevo perfil\
+> Actualización de perfil solicitado\
+> Consulta de perfil solicitado\
+> Consulta de todos los perfiles\
+> Eliminación de perfil solicitado\
+> Consulta del estado del servicio\
+> Creación de imágenes de perfil\
+> Actualización de imágenes de perfil solicitado\
+> Consulta de imágenes de perfil solicitado
 
 # Esquema de los datos de perfil
 
@@ -29,6 +42,20 @@
    "ethnicity" : ""
 }
 ```
+# Ejemplo de un archivo json con datos de imágenes de un usuario
+```
+{
+  "userid": "1",
+  "pictures": [
+    {
+      "name": "foto1.jpg",
+      "url": "myurl/foto1.jpg",
+      "order": 0
+    }
+  ]
+}
+```
+
 # Seteo de variables de entorno para usar en local:
 
   DISABLE_DB=False
