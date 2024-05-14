@@ -1,4 +1,4 @@
-from fastapi import APIRouter,HTTPException
+from fastapi import APIRouter,Path,HTTPException
 from data.client import client_db
 from data.pictures import Picture,Pictures
 from bson import ObjectId
@@ -36,7 +36,7 @@ async def create_pictures(new_pictures:Pictures):
    client_db.pictures_albums.insert_one(pictures_dict)
 
 @router.get("/user/profile/pictures/{id}")
-async def view_pictures(id: str): 
+async def view_pictures(id: str = Path(..., description="El id del usuario")): 
 #   logger.info("buscando el imágenes") 
    try:
       pictures_album = client_db.pictures_albums.find_one({"userid":id})
@@ -50,7 +50,7 @@ async def view_pictures(id: str):
       raise HTTPException(status_code=404,detail="No se ha encontrado el usuario")   
    
 @router.put("/user/profile/pictures/{id}")
-async def update_pictures(id: str,new_pictures:Pictures):     
+async def update_pictures(new_pictures:Pictures,id: str = Path(..., description="El id del usuario")):     
 #   logger.info("actualizando el imágenes")
    
    if id!=new_pictures.userid:

@@ -1,6 +1,7 @@
-from fastapi import APIRouter,HTTPException
+from fastapi import APIRouter,Path,HTTPException
 from data.client import client_db
 from data.profile import Profile
+from typing import List
 from bson import ObjectId
 from settings import Settings
 import logging
@@ -46,14 +47,14 @@ async def view_status():
     logger.info("retornando status")
     return {"status":"ok"}
 
-@router.get("/users/profiles",summary="Retorna una lista con todos los perfiles")
+@router.get("/users/profiles",response_model=List[Profile],summary="Retorna una lista con todos los perfiles")
 async def view_profiles():
     logger.info("buscando todos los perfiles")
     profiles = client_db.profiles.find()
     return profiles_schema(profiles)
 
 @router.get("/user/profile/{id}",response_model=Profile,summary="Retorna el perfil solicitado")
-async def view_profile(id: str): 
+async def view_profile(id: str = Path(..., description="El id del usuario")): 
    logger.info("buscando el perfil asociado al id de usuario:"+id) 
    try:
       profile = client_db.profiles.find_one({"userid":id})
@@ -100,7 +101,7 @@ async def create_profile(new_profile:Profile):
 	  
 	  
 @router.put("/user/profile/{id}",summary="Actualiza el perfil solicitado")
-async def update_profile(id: str,updated_profile:Profile):     
+async def update_profile(updated_profile:Profile,id: str = Path(..., description="El id del usuario")):     
    logger.info("actualizando el perfil")
    
    if id!=updated_profile.userid:
@@ -120,7 +121,7 @@ async def update_profile(id: str,updated_profile:Profile):
   
 
 @router.delete("/user/profile/{id}",summary="Elimina el perfil solicitado")
-async def delete_profile(id: str): 
+async def delete_profile(id: str = Path(..., description="El id del usuario")): 
 
    logger.info("eliminando el perfil asociado al id de usuario:"+id)   
    found = client_db.profiles.find_one_and_delete({"userid":id})
