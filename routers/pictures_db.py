@@ -1,4 +1,4 @@
-from fastapi import APIRouter,Path,HTTPException
+from fastapi import APIRouter,Path,Response,HTTPException
 from data.client import client_db
 from data.pictures import Picture,Pictures
 from bson import ObjectId
@@ -13,7 +13,6 @@ def pictures_schema(pictures)-> dict:
 #   print("pictures"+str(pictures))
    list=[]
    for picture in pictures.pictures:
-#       print("itera")
 #       list.append(Picture(**picture_schema(picture)))
        list.append(picture_schema(picture))
    return {"userid":pictures.userid,"pictures":list}
@@ -22,8 +21,8 @@ router=APIRouter(tags=["pictures"])
 
 # Operaciones de la API
 
-@router.post("/user/profile/pictures")
-async def create_pictures(new_pictures:Pictures):	 
+@router.post("/user/profile/pictures", response_class=Response,summary="Crea nuevas imágenes")
+async def create_pictures(new_pictures:Pictures)-> None:	 
    found=client_db.pictures_albums.find_one({"userid":new_pictures.userid})
    
    if found:
@@ -35,7 +34,7 @@ async def create_pictures(new_pictures:Pictures):
 #   print("pictures_dict:"+str(pictures_dict))
    client_db.pictures_albums.insert_one(pictures_dict)
 
-@router.get("/user/profile/pictures/{id}")
+@router.get("/user/profile/pictures/{id}", response_model=Pictures,summary="Retorna las imágenes solicitadas")
 async def view_pictures(id: str = Path(..., description="El id del usuario")): 
 #   logger.info("buscando el imágenes") 
    try:
@@ -43,21 +42,19 @@ async def view_pictures(id: str = Path(..., description="El id del usuario")):
 
 #      print(type(pictures_album)) 
       return Pictures(**pictures_album)
-	  #return Pictures(**pictures_schema({"pictures":pictures})) 	  
    except Exception as e:
 #      logger.error(str(e))
       print(e)
       raise HTTPException(status_code=404,detail="No se ha encontrado el usuario")   
    
-@router.put("/user/profile/pictures/{id}")
-async def update_pictures(new_pictures:Pictures,id: str = Path(..., description="El id del usuario")):     
+@router.put("/user/profile/pictures/{id}", response_class=Response,summary="Actualiza las imágenes solicitadas")
+async def update_pictures(new_pictures:Pictures,id: str = Path(..., description="El id del usuario"))-> None:     
 #   logger.info("actualizando el imágenes")
    
    if id!=new_pictures.userid:
 #      logger.error("El id de la ruta no coincide con el id del perfil")         
       raise HTTPException(status_code=400,detail="El id de la ruta no coincide con el id del perfil") 
 
-#   print(type(new_pictures)) 
    new_pictures_dict=pictures_schema(new_pictures)
 #   print(new_pictures_dict)
 #   logger.info("actualizando las imágenes en base de datos")

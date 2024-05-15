@@ -1,4 +1,4 @@
-from fastapi import APIRouter,Path,HTTPException
+from fastapi import APIRouter,Path,Response,HTTPException
 from data.client import client_db
 from data.profile import Profile
 from typing import List
@@ -76,14 +76,8 @@ def validate(profile: Profile):
       raise HTTPException(status_code=400,detail="Falta indicar el genero")	 
 	   	  
 
-@router.post("/user/profile",summary="Crea un nuevo perfil")
-async def create_profile(new_profile:Profile):	 
-#   if new_profile.userid=="":
-#      raise HTTPException(status_code=400,detail="Falta indicar el id de usuario")
-#   if new_profile.username=="":
-#      raise HTTPException(status_code=400,detail="Falta indicar el nombre de usuario")	  
-#   if new_profile.gender=="":
-#      raise HTTPException(status_code=400,detail="Falta indicar el genero")	 
+@router.post("/user/profile",summary="Crea un nuevo perfil", response_class=Response)
+async def create_profile(new_profile:Profile)-> None: 
    logger.info("creando el perfil") 
    
    validate(new_profile)
@@ -97,11 +91,10 @@ async def create_profile(new_profile:Profile):
    
    profile_dict=dict(new_profile)
    logger.info("creando el perfil en base de datos")     
-   client_db.profiles.insert_one(profile_dict)
+   client_db.profiles.insert_one(profile_dict)  
 	  
-	  
-@router.put("/user/profile/{id}",summary="Actualiza el perfil solicitado")
-async def update_profile(updated_profile:Profile,id: str = Path(..., description="El id del usuario")):     
+@router.put("/user/profile/{id}",summary="Actualiza el perfil solicitado", response_class=Response)
+async def update_profile(updated_profile:Profile,id: str = Path(..., description="El id del usuario"))-> None:     
    logger.info("actualizando el perfil")
    
    if id!=updated_profile.userid:
@@ -120,8 +113,8 @@ async def update_profile(updated_profile:Profile,id: str = Path(..., description
       raise HTTPException(status_code=404,detail="No existe el usuario")
   
 
-@router.delete("/user/profile/{id}",summary="Elimina el perfil solicitado")
-async def delete_profile(id: str = Path(..., description="El id del usuario")): 
+@router.delete("/user/profile/{id}",summary="Elimina el perfil solicitado", response_class=Response)
+async def delete_profile(id: str = Path(..., description="El id del usuario"))-> None: 
 
    logger.info("eliminando el perfil asociado al id de usuario:"+id)   
    found = client_db.profiles.find_one_and_delete({"userid":id})
