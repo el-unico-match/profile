@@ -1,9 +1,11 @@
-from fastapi import APIRouter,HTTPException
-from data.client import client_db
+from fastapi import APIRouter,Path,Depends,Response,HTTPException
+#from data.client import client_db
 from data.profile import Profile
+from typing import List
 from bson import ObjectId
 from settings import Settings
 import logging
+import data.client as client
 
 settings=Settings()
 
@@ -46,14 +48,14 @@ async def view_status():
     logger.info("retornando status")
     return {"status":"ok"}
 
-@router.get("/users/profiles",summary="Retorna una lista con todos los perfiles")
-async def view_profiles():
+@router.get("/users/profiles",response_model=List[Profile],summary="Retorna una lista con todos los perfiles")
+async def view_profiles(client_db = Depends(client.get_db)):
     logger.info("buscando todos los perfiles")
     profiles = client_db.profiles.find()
     return profiles_schema(profiles)
 
 @router.get("/user/profile/{id}",response_model=Profile,summary="Retorna el perfil solicitado")
-async def view_profile(id: str): 
+async def view_profile(client_db = Depends(client.get_db),id: str = Path(..., description="El id del usuario")): 
    logger.info("buscando el perfil asociado al id de usuario:"+id) 
    try:
       profile = client_db.profiles.find_one({"userid":id})
@@ -75,14 +77,8 @@ def validate(profile: Profile):
       raise HTTPException(status_code=400,detail="Falta indicar el genero")	 
 	   	  
 
-@router.post("/user/profile",summary="Crea un nuevo perfil")
-async def create_profile(new_profile:Profile):	 
-#   if new_profile.userid=="":
-#      raise HTTPException(status_code=400,detail="Falta indicar el id de usuario")
-#   if new_profile.username=="":
-#      raise HTTPException(status_code=400,detail="Falta indicar el nombre de usuario")	  
-#   if new_profile.gender=="":
-#      raise HTTPException(status_code=400,detail="Falta indicar el genero")	 
+@router.post("/user/profile",summary="Crea un nuevo perfil", response_class=Response)
+async def create_profile(new_profile:Profile,client_db = Depends(client.get_db))-> None: 
    logger.info("creando el perfil") 
    
    validate(new_profile)
@@ -96,11 +92,10 @@ async def create_profile(new_profile:Profile):
    
    profile_dict=dict(new_profile)
    logger.info("creando el perfil en base de datos")     
-   client_db.profiles.insert_one(profile_dict)
+   client_db.profiles.insert_one(profile_dict)  
 	  
-	  
-@router.put("/user/profile/{id}",summary="Actualiza el perfil solicitado")
-async def update_profile(id: str,updated_profile:Profile):     
+@router.put("/user/profile/{id}",summary="Actualiza el perfil solicitado", response_class=Response)
+async def update_profile(updated_profile:Profile,client_db = Depends(client.get_db),id: str = Path(..., description="El id del usuario"))-> None:     
    logger.info("actualizando el perfil")
    
    if id!=updated_profile.userid:
@@ -119,8 +114,8 @@ async def update_profile(id: str,updated_profile:Profile):
       raise HTTPException(status_code=404,detail="No existe el usuario")
   
 
-@router.delete("/user/profile/{id}",summary="Elimina el perfil solicitado")
-async def delete_profile(id: str): 
+@router.delete("/user/profile/{id}",summary="Elimina el perfil solicitado", response_class=Response)
+async def delete_profile(client_db = Depends(client.get_db),id: str = Path(..., description="El id del usuario"))-> None: 
 
    logger.info("eliminando el perfil asociado al id de usuario:"+id)   
    found = client_db.profiles.find_one_and_delete({"userid":id})

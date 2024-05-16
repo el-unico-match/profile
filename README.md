@@ -1,7 +1,7 @@
 # profile
 
 > __versión actual:__\
-> 0.0.4\
+> 0.0.5
 > \
 > __Funcionalidades actuales:__\
 > \
@@ -15,7 +15,10 @@
 > Actualización de imágenes de perfil solicitado\
 > Consulta de imágenes de perfil solicitado
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> checkpoint-2
 | Operación                                       | Retorna           | HTTP request                                                                             |
 |-------------------------------------------------|-------------------|------------------------------------------------------------------------------------------|
 | Retornar el estado del servicio                 | Estado            | GET https://profile-uniquegroup-match-fiuba.azurewebsites.net/status                     |
