@@ -14,9 +14,8 @@ app.dependency_overrides[client.get_db] = override_get_db
 
 client = TestClient(app)
 
-def test_view_profile_1():
+def test_view_user_1_profile():
     response = client.get("/user/profile/1")
-#    print(response)
     assert response.status_code == 200, response.text
     data = response.json()
     assert data["userid"] == "1"
@@ -28,3 +27,27 @@ def test_view_profile_1():
     assert data["age"] == 33
     assert data["education"] == "Ingeniero civil"
     assert data["ethnicity"] == "Europeo"
+	
+def test_view_profiles():
+    response = client.get("/users/profiles/")
+    assert response.status_code == 200, response.text
+    data = response.json()[0]
+    assert data["userid"] == "1"
+    assert data["username"] == "Luis Huergo"
+    assert data["email"] == "lhuergo@fi.uba.ar"
+    assert data["description"] == "Estudié en la UBA"
+    assert data["gender"] == "Hombre"
+    assert data["looking_for"] == "Mujer"
+    assert data["age"] == 33
+    assert data["education"] == "Ingeniero civil"
+    assert data["ethnicity"] == "Europeo"	
+	
+def test_view_user_1_pictures():
+    response = client.get("/user/profile/pictures/1")
+    assert response.status_code == 200, response.text
+    data = response.json()
+    assert data["userid"] == "1"
+    pictures=data["pictures"][0]
+    assert pictures["name"] == "foto1.jpg"
+    assert pictures["url"] == "myurl/foto1.jpg"
+    assert pictures["order"] == 0

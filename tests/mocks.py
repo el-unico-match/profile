@@ -1,5 +1,4 @@
 from fastapi import HTTPException
-#pendiente de subir al repositorio
 
 class Profiles_mock:
 
@@ -37,11 +36,32 @@ class Profiles_mock:
    "ethnicity" : "Europeo"
    }
 
+class Pictures_mock:
+
+    def __init__(self):
+        pass	    
+	
+    def find_one(self,dictionary):
+        if dictionary["userid"]!="1":
+           raise HTTPException(status_code=404,detail="No se ha encontrado el usuario")
+        else:
+           return {
+        "userid": "1",
+        "pictures": [
+        {
+           "name": "foto1.jpg",
+           "url": "myurl/foto1.jpg",
+           "order": 0
+        }
+        ]
+        }
+
 
 
 class Mocks:
 
     profiles=Profiles_mock()
+    pictures_albums=Pictures_mock()
 
     def __init__(self):
         pass  
