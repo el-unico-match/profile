@@ -1,7 +1,7 @@
 # profile
 
 > __versión actual:__\
-> 0.0.4\
+> 0.0.5
 > \
 > __Funcionalidades actuales:__\
 > \
