@@ -15,7 +15,6 @@
 > Actualización de imágenes de perfil solicitado\
 > Consulta de imágenes de perfil solicitado
 
-
 | Operación                                       | Retorna           | HTTP request                                                                             |
 |-------------------------------------------------|-------------------|------------------------------------------------------------------------------------------|
 | Retornar el estado del servicio                 | Estado            | GET https://profile-uniquegroup-match-fiuba.azurewebsites.net/status                     |
