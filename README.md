@@ -16,9 +16,12 @@
 > Consulta de imágenes de perfil solicitado
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 >>>>>>> checkpoint-2
+=======
+>>>>>>> 27d597b34413094cce4b8f92a9a299533574b165
 | Operación                                       | Retorna           | HTTP request                                                                             |
 |-------------------------------------------------|-------------------|------------------------------------------------------------------------------------------|
 | Retornar el estado del servicio                 | Estado            | GET https://profile-uniquegroup-match-fiuba.azurewebsites.net/status                     |
