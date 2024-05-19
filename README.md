@@ -121,3 +121,5 @@
   1) Abrir el navegador
   2) Escribir en la barra de direcciones: http://127.0.0.1:8000/redoc 
   
+# Coveral
+Covertura: [![Coverage Status](https://coveralls.io/repos/github/el-unico-match/profile/badge.svg?branch=coveral-incorporation)](https://coveralls.io/github/el-unico-match/profile?branch=coveral-incorporation)
