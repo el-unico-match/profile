@@ -16,7 +16,7 @@ app.dependency_overrides[client.get_db] = override_get_db
 client = TestClient(app)
 
 class TestFeedAceptanceCriteria(TestCase):
-    def test_view_user_1_profile():
+    def test_view_user_1_profile(self):
         response = client.get("/user/profile/1")
         assert response.status_code == 200, response.text
         data = response.json()
@@ -30,7 +30,7 @@ class TestFeedAceptanceCriteria(TestCase):
         assert data["education"] == "Ingeniero civil"
         assert data["ethnicity"] == "Europeo"
         
-    def test_view_profiles():
+    def test_view_profiles(self):
         response = client.get("/users/profiles/")
         assert response.status_code == 200, response.text
         data = response.json()[0]
@@ -44,58 +44,58 @@ class TestFeedAceptanceCriteria(TestCase):
         assert data["education"] == "Ingeniero civil"
         assert data["ethnicity"] == "Europeo"	
 
-    def test_1_create_invalid_user_profile():
+    def test_1_create_invalid_user_profile(self):
         response = client.post("/user/profile/",
         json={ "userid" : "",
-    "username" : "Luis Huergo",
-    "email" : "lhuergo@fi.uba.ar",
-    "description" : "Estudié en la UBA",
-    "gender" : "Hombre",
-    "looking_for" : "Mujer",
-    "age" : 33,
-    "education" : "Ingeniero civil",
-    "ethnicity" : ""
-    })
+            "username" : "Luis Huergo",
+            "email" : "lhuergo@fi.uba.ar",
+            "description" : "Estudié en la UBA",
+            "gender" : "Hombre",
+            "looking_for" : "Mujer",
+            "age" : 33,
+            "education" : "Ingeniero civil",
+            "ethnicity" : ""
+        })
         assert response.status_code == 400, response.text
         response = response.text
         print(response)
         assert response == '{"detail":"Falta indicar el id de usuario"}'
 
-    def test_2_create_invalid_user_profile():
+    def test_2_create_invalid_user_profile(self):
         response = client.post("/user/profile/",
         json={ "userid" : "2",
-    "username" : "",
-    "email" : "lhuergo@fi.uba.ar",
-    "description" : "Estudié en la UBA",
-    "gender" : "Hombre",
-    "looking_for" : "Mujer",
-    "age" : 33,
-    "education" : "Ingeniero civil",
-    "ethnicity" : ""
-    })
+            "username" : "",
+            "email" : "lhuergo@fi.uba.ar",
+            "description" : "Estudié en la UBA",
+            "gender" : "Hombre",
+            "looking_for" : "Mujer",
+            "age" : 33,
+            "education" : "Ingeniero civil",
+            "ethnicity" : ""
+        })
         assert response.status_code == 400, response.text
         response = response.text
         print(response)
         assert response == '{"detail":"Falta indicar el nombre de usuario"}'
 
-    def test_3_create_invalid_user_profile():
+    def test_3_create_invalid_user_profile(self):
         response = client.post("/user/profile/",
         json={ "userid" : "2",
-    "username" : "Luis",
-    "email" : "lhuergo@fi.uba.ar",
-    "description" : "Estudié en la UBA",
-    "gender" : "",
-    "looking_for" : "Mujer",
-    "age" : 33,
-    "education" : "Ingeniero civil",
-    "ethnicity" : ""
-    })
+            "username" : "Luis",
+            "email" : "lhuergo@fi.uba.ar",
+            "description" : "Estudié en la UBA",
+            "gender" : "",
+            "looking_for" : "Mujer",
+            "age" : 33,
+            "education" : "Ingeniero civil",
+            "ethnicity" : ""
+        })
         assert response.status_code == 400, response.text
         response = response.text
         print(response)
         assert response == '{"detail":"Falta indicar el genero"}'
         
-    def test_view_user_1_pictures():
+    def test_view_user_1_pictures(self):
         response = client.get("/user/profile/pictures/1")
         assert response.status_code == 200, response.text
         data = response.json()
