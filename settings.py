@@ -21,4 +21,4 @@ class Settings(BaseSettings):
     remote_db_name:str='remote'	
     db_name:str=local_db_name
 	
-    model_config = SettingsConfigDict(env_file=".env")	
+    model_config = SettingsConfigDict(env_file=("dev.env",".env"))	
