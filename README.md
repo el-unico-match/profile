@@ -42,6 +42,9 @@
 | education   | string  |
 | ethnicity   | string  |  
 
+# Ejemplo de un archivo json con datos de varios perfiles de un usuario
+https://github.com/el-unico-match/profile/blob/dev/data/profiles-example.json
+
 # Ejemplo de un archivo json con datos del perfil de un usuario
 ```
 { "userid" : "66304a6b2891cdcfebdbdc6f",
