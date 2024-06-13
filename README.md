@@ -1,7 +1,7 @@
 # profile
 
 > __versión actual:__\
-> 0.0.5
+> 0.0.6
 > \
 > __Funcionalidades actuales:__\
 > \
@@ -11,8 +11,8 @@
 > Consulta de todos los perfiles\
 > Eliminación de perfil solicitado\
 > Consulta del estado del servicio\
-> Creación de imágenes de perfil\
-> Actualización de imágenes de perfil solicitado\
+> Creación de imágenes de perfil (agrego nuevo campo)\
+> Actualización de imágenes de perfil solicitado (agrego nuevo campo)\
 > Consulta de imágenes de perfil solicitado
 
 | Operación                                       | Retorna           | HTTP request                                                                             |
