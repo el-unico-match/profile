@@ -67,7 +67,7 @@ https://github.com/el-unico-match/profile/blob/dev/data/profiles-example.json
       "name": "foto1.jpg",
       "url": "myurl/foto1.jpg",
       "order": 0,
-	  "type":"perfil"
+      "type": "perfil"
     }
   ]
 }
