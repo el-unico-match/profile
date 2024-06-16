@@ -7,6 +7,7 @@ class Picture(BaseModel):
    name: str
    url: str
    order: int 
+   type: str    
    
 class Pictures(BaseModel):
    userid: str

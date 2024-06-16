@@ -8,7 +8,8 @@ import data.client as client
 def picture_schema(picture)-> dict:
     return {"name":picture.name,
          	"url":picture.url,
-	        "order":picture.order
+	        "order":picture.order,
+			"type":picture.type
 			}
 
 def pictures_schema(pictures)-> dict:
