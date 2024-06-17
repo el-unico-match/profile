@@ -10,7 +10,7 @@ import logging
 
 settings=Settings()
 
-logging.basicConfig(format='[%(filename)s] %(levelname)s %(message)s',filename=settings.log_filename,level=settings.logging_level)
+logging.basicConfig(format='%(asctime)s [%(filename)s] %(levelname)s %(message)s',filename=settings.log_filename,level=settings.logging_level)
 logger=logging.getLogger(__name__)
 
 
