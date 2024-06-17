@@ -102,3 +102,4 @@ def test_view_user_1_pictures():
     assert pictures["name"] == "foto1.jpg"
     assert pictures["url"] == "myurl/foto1.jpg"
     assert pictures["order"] == 0
+    assert pictures["type"] == "profile"
