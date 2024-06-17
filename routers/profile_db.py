@@ -3,13 +3,14 @@ from fastapi import APIRouter,Path,Depends,Response,HTTPException
 from data.profile import Profile
 from typing import List
 from bson import ObjectId
+import data.client as client
 from settings import Settings
 import logging
-import data.client as client
+
 
 settings=Settings()
 
-logging.basicConfig(filename=settings.log_filename,level=settings.logging_level)
+logging.basicConfig(format='%(asctime)s [%(filename)s] %(levelname)s %(message)s',filename=settings.log_filename,level=settings.logging_level)
 logger=logging.getLogger(__name__)
 
 
