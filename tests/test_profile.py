@@ -17,7 +17,7 @@ client = TestClient(app)
 
 class TestFeedAceptanceCriteria(TestCase):
 
-    def test_status():
+    def test_status(self):
         response = client.get("/status")
         assert response.status_code == 200
         assert response.json() == {"status": "ok"}
@@ -36,7 +36,7 @@ class TestFeedAceptanceCriteria(TestCase):
         assert data["education"] == "Ingeniero civil"
         assert data["ethnicity"] == "Europeo"
         
-    def test_view_inexistent_user_profiel():
+    def test_view_inexistent_user_profiel(self):
         response = client.get("/user/profile/1234")
         assert response.status_code == 404, response.text		
 		
@@ -116,6 +116,6 @@ class TestFeedAceptanceCriteria(TestCase):
         assert pictures["order"] == 0
         assert pictures["type"] == "profile"		
 
-    def test_view_inexistent_user_pictures():
+    def test_view_inexistent_user_pictures(self):
         response = client.get("/user/profile/pictures/1234")
         assert response.status_code == 404, response.text			
