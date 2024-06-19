@@ -51,7 +51,8 @@ class Pictures_mock:
         {
            "name": "foto1.jpg",
            "url": "myurl/foto1.jpg",
-           "order": 0
+           "order": 0,
+           "type": "profile"		   
         }
         ]
         }
