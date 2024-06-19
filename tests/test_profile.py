@@ -14,6 +14,11 @@ app.dependency_overrides[client.get_db] = override_get_db
 
 client = TestClient(app)
 
+def test_status():
+    response = client.get("/status")
+    assert response.status_code == 200
+    assert response.json() == {"status": "ok"}
+
 def test_view_user_1_profile():
     response = client.get("/user/profile/1")
     assert response.status_code == 200, response.text
@@ -27,6 +32,10 @@ def test_view_user_1_profile():
     assert data["age"] == 33
     assert data["education"] == "Ingeniero civil"
     assert data["ethnicity"] == "Europeo"
+
+def test_view_inexistent_user_profiel():
+    response = client.get("/user/profile/1234")
+    assert response.status_code == 404, response.text
 	
 def test_view_profiles():
     response = client.get("/users/profiles/")
@@ -102,3 +111,8 @@ def test_view_user_1_pictures():
     assert pictures["name"] == "foto1.jpg"
     assert pictures["url"] == "myurl/foto1.jpg"
     assert pictures["order"] == 0
+    assert pictures["type"] == "profile"
+	
+def test_view_inexistent_user_pictures():
+    response = client.get("/user/profile/pictures/1234")
+    assert response.status_code == 404, response.text	
