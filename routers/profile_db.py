@@ -78,8 +78,8 @@ def validate(profile: Profile):
       raise HTTPException(status_code=400,detail="Falta indicar el genero")	 
 	   	  
 
-@router.post("/user/profile",summary="Crea un nuevo perfil", response_class=Response)
-async def create_profile(new_profile:Profile,client_db = Depends(client.get_db))-> None: 
+@router.post("/user/profile",response_model=Profile,summary="Crea un nuevo perfil")
+async def create_profile(new_profile:Profile,client_db = Depends(client.get_db)): 
    logger.info("creando el perfil") 
    
    validate(new_profile)
@@ -94,9 +94,12 @@ async def create_profile(new_profile:Profile,client_db = Depends(client.get_db))
    profile_dict=dict(new_profile)
    logger.info("creando el perfil en base de datos")     
    client_db.profiles.insert_one(profile_dict)  
-	  
-@router.put("/user/profile/{id}",summary="Actualiza el perfil solicitado", response_class=Response)
-async def update_profile(updated_profile:Profile,client_db = Depends(client.get_db),id: str = Path(..., description="El id del usuario"))-> None:     
+
+   profile = client_db.profiles.find_one({"userid":new_profile.userid})
+   return Profile(**profile_schema(profile)) 	 
+   
+@router.put("/user/profile/{id}",response_model=Profile,summary="Actualiza el perfil solicitado")
+async def update_profile(updated_profile:Profile,client_db = Depends(client.get_db),id: str = Path(..., description="El id del usuario")):     
    logger.info("actualizando el perfil")
    
    if id!=updated_profile.userid:
@@ -113,7 +116,9 @@ async def update_profile(updated_profile:Profile,client_db = Depends(client.get_
    if not found:
       logger.error("el usuario no existe")      
       raise HTTPException(status_code=404,detail="No existe el usuario")
-  
+
+   profile = client_db.profiles.find_one({"userid":updated_profile.userid})
+   return Profile(**profile_schema(profile)) 	  
 
 @router.delete("/user/profile/{id}",summary="Elimina el perfil solicitado", response_class=Response)
 async def delete_profile(client_db = Depends(client.get_db),id: str = Path(..., description="El id del usuario"))-> None: 
