@@ -30,8 +30,8 @@ router=APIRouter(tags=["pictures"])
 
 # Operaciones de la API
 
-@router.post("/user/profile/pictures", response_class=Response,summary="Crea nuevas imágenes")
-async def create_pictures(new_pictures:Pictures,client_db = Depends(client.get_db))-> None:	 
+@router.post("/user/profile/pictures", response_model=Pictures,summary="Crea nuevas imágenes")
+async def create_pictures(new_pictures:Pictures,client_db = Depends(client.get_db)):	 
    logger.info("creando el imágenes")
    found=client_db.pictures_albums.find_one({"userid":new_pictures.userid})
    
@@ -45,6 +45,9 @@ async def create_pictures(new_pictures:Pictures,client_db = Depends(client.get_d
 #   print("pictures_dict:"+str(pictures_dict))
    client_db.pictures_albums.insert_one(pictures_dict)
 
+   pictures_album = client_db.pictures_albums.find_one({"userid":new_pictures.userid})
+   return Pictures(**pictures_album)   
+   
 @router.get("/user/profile/pictures/{id}", response_model=Pictures,summary="Retorna las imágenes solicitadas")
 async def view_pictures(client_db = Depends(client.get_db),id: str = Path(..., description="El id del usuario")): 
    logger.info("buscando el imágenes") 
@@ -58,8 +61,8 @@ async def view_pictures(client_db = Depends(client.get_db),id: str = Path(..., d
       print(e)
       raise HTTPException(status_code=404,detail="No se ha encontrado el usuario")   
    
-@router.put("/user/profile/pictures/{id}", response_class=Response,summary="Actualiza las imágenes solicitadas")
-async def update_pictures(new_pictures:Pictures,client_db = Depends(client.get_db),id: str = Path(..., description="El id del usuario"))-> None:     
+@router.put("/user/profile/pictures/{id}", response_model=Pictures,summary="Actualiza las imágenes solicitadas")
+async def update_pictures(new_pictures:Pictures,client_db = Depends(client.get_db),id: str = Path(..., description="El id del usuario")):     
    logger.info("actualizando el imágenes")
    
    if id!=new_pictures.userid:
@@ -74,3 +77,6 @@ async def update_pictures(new_pictures:Pictures,client_db = Depends(client.get_d
    if not found:
       logger.error("el usuario no existe")      
       raise HTTPException(status_code=404,detail="No existe el usuario")   
+
+   pictures_album = client_db.pictures_albums.find_one({"userid":new_pictures.userid})
+   return Pictures(**pictures_album) 	  
