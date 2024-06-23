@@ -1,9 +1,7 @@
-from settings import Settings
+from settings import settings
 from pymongo import MongoClient
 #import logging
 #import sys
-
-settings=Settings()	
 
 #logging.basicConfig(filename=settings.log_filename)
 #logging.basicConfig()
