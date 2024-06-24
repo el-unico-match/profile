@@ -44,7 +44,9 @@ jobs:
           echo "DB_HOST=${{ secrets.DB_CNN  }}" >> .env         
           echo "LOCAL_DB_NAME=${{ vars.LOCAL_DB_NAME  }}" >> .env   
           echo "REMOTE_DB_NAME=${{ vars.REMOTE_DB_NAME  }}" >> .env           
-          echo "DB_NAME=${{ vars.DB_NAME  }}" >> .env            
+          echo "DB_NAME=${{ vars.DB_NAME  }}" >> .env
+          echo "apikey_value=${{ secrets.APIKEY_VALUE  }}" >> .env            
+          echo "apikey_activate_endpoint=${{ vars.APIKEY_ACTIVATE_ENDPOINT  }}" >> .env
 
       - name: Build and push container image to registry
         uses: docker/build-push-action@0565240e2d4ab88bba5387d719585280857ece09 # v5.0.0
