@@ -38,7 +38,7 @@ class Profiles_mock:
 
     def find_one_and_delete(self,dictionary):
         if dictionary["userid"]!="1":
-           raise HTTPException(status_code=404,detail="No existe el usuario")
+           return None #raise HTTPException(status_code=404,detail="No existe el usuario")
    
 class Pictures_mock:
 
@@ -63,7 +63,7 @@ class Pictures_mock:
 		
     def find_one_and_replace(self,keydictionary,dictionary):
         if dictionary["userid"]!="1":
-           raise HTTPException(status_code=404,detail="No existe el usuario")	
+           return None #raise HTTPException(status_code=404,detail="No existe el usuario")	
 
 class Mocks:
 
