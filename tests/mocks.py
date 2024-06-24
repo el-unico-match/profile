@@ -59,21 +59,7 @@ class Pictures_mock:
 		
     def find_one_and_replace(self,keydictionary,dictionary):
         if dictionary["userid"]!="1":
-           raise HTTPException(status_code=404,detail="No existe el usuario")
-        else:
-           return {
-        "userid": "1",
-        "pictures": [
-        {
-           "name": "foto1.jpg",
-           "url": "myurl/foto1.jpg",
-           "order": 0,
-		   "type": "profile"
-        }
-        ]
-        }	
-
-
+           raise HTTPException(status_code=404,detail="No existe el usuario")	
 
 class Mocks:
 

@@ -205,3 +205,8 @@ def test_update_inexistent_user_pictures():
     response = response.text
     print(response)
     assert response == '{"detail":"No existe el usuario"}'
+	
+def test_delete_inexistent_user_profile():
+    response = client.get("/user/profile/1234")
+    assert response.status_code == 404, response.text
+	
