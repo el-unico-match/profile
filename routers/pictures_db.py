@@ -3,10 +3,8 @@ from fastapi import APIRouter,Path,Depends,Response,HTTPException
 from data.pictures import Picture,Pictures
 from bson import ObjectId
 import data.client as client
-from settings import Settings
+from settings import settings
 import logging
-
-settings=Settings()
 
 logging.basicConfig(format='%(asctime)s [%(filename)s] %(levelname)s %(message)s',filename=settings.log_filename,level=settings.logging_level)
 logger=logging.getLogger(__name__)

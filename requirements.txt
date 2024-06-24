@@ -1,7 +1,12 @@
 #bson -- pymongo automatically installs it
 fastapi
+pydantic
 pydantic_settings 
+pyjwt
 pymongo
+pytest
+pytest-cov
+requests
 routers 
 typing
 uvicorn

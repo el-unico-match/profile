@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from routers import profile,profile_db,pictures_db
-from settings import Settings
+from settings import settings
+from data.apikey import enableApiKey
 
 #from pydantic_settings import BaseSettings,SettingsConfigDict
 
@@ -9,11 +10,12 @@ from settings import Settings
 #
 #    model_config = SettingsConfigDict(env_file=".env")	
 #	
-settings=Settings()	
 
 summary="Microservicio que se encarga de todo lo relativo a datos adicionales del usuario (como por ejemplo descripciones e imágenes)"
 
 app=FastAPI(title="perfil",version="0.0.7",summary=summary)
+
+enableApiKey()
 
 # Para iniciar el server hacer: uvicorn main:app --reload
 
