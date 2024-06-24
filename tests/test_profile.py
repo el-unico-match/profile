@@ -153,6 +153,22 @@ def test_3_update_invalid_user_profile():
     response = response.text
     print(response)
     assert response == '{"detail":"Falta indicar el genero"}'
+
+def test_update_inexistent_user_profile():
+    response = client.put("/user/profile/1234",
+    json={ "userid" : "1234",
+   "username" : "Luis",
+   "email" : "lhuergo@fi.uba.ar",
+   "description" : "Estudié en la UBA",
+   "gender" : "Hombre",
+   "looking_for" : "Mujer",
+   "age" : 33,
+   "education" : "Ingeniero civil",
+   "ethnicity" : ""
+})
+    assert response.status_code == 404, response.text
+    response = response.text
+    assert response == '{"detail":"No existe el usuario"}'
 	
 def test_view_user_1_pictures():
     response = client.get("/user/profile/pictures/1")
