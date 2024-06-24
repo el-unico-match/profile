@@ -1,9 +1,9 @@
 # profile
 
-> __versión actual:__
+> __Versión actual__
 > * 0.0.7
 > 
-> __Funcionalidades actuales:__
+> __Funcionalidades actuales__
 > * Creación de nuevo perfil (retorna perfil)
 > * Actualización de perfil solicitado (retorna perfil)
 > * Consulta de perfil solicitado
@@ -127,6 +127,4 @@ https://github.com/el-unico-match/profile/blob/dev/data/profiles-example.json
 # Para acceder a la documentación con Redocly: 
   1) Abrir el navegador
   2) Escribir en la barra de direcciones: http://127.0.0.1:8000/redoc 
-  
-# Coveral
-Covertura: [![Coverage Status](https://coveralls.io/repos/github/el-unico-match/profile/badge.svg?branch=coveral-incorporation)](https://coveralls.io/github/el-unico-match/profile?branch=coveral-incorporation)
+
