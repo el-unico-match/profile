@@ -37,7 +37,7 @@ class Profiles_mock:
    }
 
     def find_one_and_replace(self,keydictionary,dictionary):
-        if dictionary["userid"]!="1":
+        if keydictionary["userid"]!="1":
            return None   
    
     def find_one_and_delete(self,dictionary):
