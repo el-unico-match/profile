@@ -168,3 +168,40 @@ def test_view_user_1_pictures():
 def test_view_inexistent_user_pictures():
     response = client.get("/user/profile/pictures/1234")
     assert response.status_code == 404, response.text	
+	
+def test_create_existent_user_pictures():
+    response = client.post("/user/profile/pictures",
+    json={
+        "userid": "1",
+        "pictures": [
+        {
+           "name": "foto1.jpg",
+           "url": "myurl/foto1.jpg",
+           "order": 0,
+		   "type": "profile"
+        }
+        ]
+        })
+
+    assert response.status_code == 400, response.text
+    response = response.text
+    print(response)
+    assert response == '{"detail":"El usuario ya existe"}'	
+	
+def test_update_inexistent_user_pictures():
+    response = client.put("/user/profile/pictures/1234",
+    json={
+        "userid": "1234",
+        "pictures": [
+        {
+           "name": "foto1.jpg",
+           "url": "myurl/foto1.jpg",
+           "order": 0,
+		   "type": "profile"
+        }
+        ]
+        })
+    assert response.status_code == 404, response.text
+    response = response.text
+    print(response)
+    assert response == '{"detail":"No existe el usuario"}'
