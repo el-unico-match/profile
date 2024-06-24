@@ -36,6 +36,10 @@ class Profiles_mock:
    "ethnicity" : "Europeo"
    }
 
+    def find_one_and_delete(self,dictionary):
+        if dictionary["userid"]!="1":
+           raise HTTPException(status_code=404,detail="No existe el usuario")
+   
 class Pictures_mock:
 
     def __init__(self):
