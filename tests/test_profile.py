@@ -33,7 +33,7 @@ def test_view_user_1_profile():
     assert data["education"] == "Ingeniero civil"
     assert data["ethnicity"] == "Europeo"
 
-def test_view_inexistent_user_profiel():
+def test_view_inexistent_user_profile():
     response = client.get("/user/profile/1234")
     assert response.status_code == 404, response.text
 	
@@ -88,6 +88,58 @@ def test_2_create_invalid_user_profile():
 def test_3_create_invalid_user_profile():
     response = client.post("/user/profile/",
     json={ "userid" : "2",
+   "username" : "Luis",
+   "email" : "lhuergo@fi.uba.ar",
+   "description" : "Estudié en la UBA",
+   "gender" : "",
+   "looking_for" : "Mujer",
+   "age" : 33,
+   "education" : "Ingeniero civil",
+   "ethnicity" : ""
+})
+    assert response.status_code == 400, response.text
+    response = response.text
+    print(response)
+    assert response == '{"detail":"Falta indicar el genero"}'
+
+def test_create_existent_user_profile():
+    response = client.post("/user/profile",
+    json={ "userid": "1",
+  "username": "Luis Huergo",
+  "email": "lhuergo@fi.uba.ar",
+  "description": "Estudié en la UBA",
+  "gender": "Hombre",
+  "looking_for": "Mujer",
+  "age": 33,
+  "education": "Ingeniero civil",
+  "ethnicity": "Europeo"
+})
+
+    assert response.status_code == 400, response.text
+    response = response.text
+    print(response)
+    assert response == '{"detail":"El usuario ya existe"}'
+
+def test_2_update_invalid_user_profile():
+    response = client.put("/user/profile/1",
+    json={ "userid" : "1",
+   "username" : "",
+   "email" : "lhuergo@fi.uba.ar",
+   "description" : "Estudié en la UBA",
+   "gender" : "Hombre",
+   "looking_for" : "Mujer",
+   "age" : 33,
+   "education" : "Ingeniero civil",
+   "ethnicity" : ""
+})
+    assert response.status_code == 400, response.text
+    response = response.text
+    print(response)
+    assert response == '{"detail":"Falta indicar el nombre de usuario"}'
+
+def test_3_update_invalid_user_profile():
+    response = client.put("/user/profile/1",
+    json={ "userid" : "1",
    "username" : "Luis",
    "email" : "lhuergo@fi.uba.ar",
    "description" : "Estudié en la UBA",
