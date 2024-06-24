@@ -1,20 +1,23 @@
 # profile
 
-> __versión actual:__\
-> 0.0.7
-> \
-> __Funcionalidades actuales:__\
-> \
-> Creación de nuevo perfil (retorna perfil)\
-> Actualización de perfil solicitado (retorna perfil)\
-> Consulta de perfil solicitado\
-> Consulta de todos los perfiles\
-> Eliminación de perfil solicitado\
-> Consulta del estado del servicio\
-> Creación de imágenes de perfil (retorna imágenes)\
-> Actualización de imágenes de perfil solicitado (retorna imágenes)\
-> Consulta de imágenes de perfil solicitado
-
+> __versión actual:__
+> * 0.0.7
+> 
+> __Funcionalidades actuales:__
+> * Creación de nuevo perfil (retorna perfil)
+> * Actualización de perfil solicitado (retorna perfil)
+> * Consulta de perfil solicitado
+> * Consulta de todos los perfiles
+> * Eliminación de perfil solicitado
+> * Consulta del estado del servicio
+> * Creación de imágenes de perfil (retorna imágenes)
+> * Actualización de imágenes de perfil solicitado (retorna imágenes)
+> * Consulta de imágenes de perfil solicitado
+>
+> __Cobertura de código__
+> * [![Coverage Status](https://coveralls.io/repos/github/el-unico-match/profile/badge.svg?branch=coverage-con-pytest)](https://coveralls.io/github/el-unico-match/profile?branch=coverage-con-pytest)
+>
+> <br/> 
 | Operación                                       | Retorna           | HTTP request                                                                             |
 |-------------------------------------------------|-------------------|------------------------------------------------------------------------------------------|
 | Retornar el estado del servicio                 | Estado            | GET https://profile-uniquegroup-match-fiuba.azurewebsites.net/status                     |
