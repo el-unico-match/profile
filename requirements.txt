@@ -1,5 +1,6 @@
 #bson -- pymongo automatically installs it
 fastapi
+httpx
 pydantic
 pydantic_settings 
 pyjwt

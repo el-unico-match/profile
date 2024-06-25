@@ -6,6 +6,7 @@ from bson import ObjectId
 import data.client as client
 from settings import settings
 import logging
+from endpoints.putWhitelist import PutWhiteList, update_whitelist
 
 logging.basicConfig(format='%(asctime)s [%(filename)s] %(levelname)s %(message)s',filename=settings.log_filename,level=settings.logging_level)
 logger=logging.getLogger(__name__)
@@ -45,6 +46,11 @@ router=APIRouter(tags=["profile"])
 async def view_status(): 
     logger.info("retornando status")
     return {"status":"ok"}
+
+@router.put("/whitelist",summary="Actualiza la whitelist del servicio")
+async def updateWhitelist(whitelist: PutWhiteList):
+    update_whitelist(whitelist)
+    return Response(status_code=201,content="Lista actualizada")
 
 @router.get("/users/profiles",response_model=List[Profile],summary="Retorna una lista con todos los perfiles")
 async def view_profiles(client_db = Depends(client.get_db)):

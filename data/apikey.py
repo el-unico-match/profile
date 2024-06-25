@@ -15,8 +15,9 @@ def enableApiKey():
             json={'availability': 'enabled'}
             response = requests.patch(url, headers=headers, json=json)
 
-            if ( response.status_code == 200):
-                settings.apikey_status = response.availability
+            if ( response.ok == True):
+                data = response.json()
+                settings.apikey_status = data['availability']
                 logger.info("apikey enabled") 
 
             else:
