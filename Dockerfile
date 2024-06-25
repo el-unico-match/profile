@@ -5,8 +5,8 @@ WORKDIR /
 
 # Copies folders into workdir
 COPY data/ data/
-COPY endpoints /
-COPY middlewares /
+COPY endpoints endpoints/
+COPY middlewares middlewares/
 COPY routers/ routers/
 
 # Copies files into workdir
