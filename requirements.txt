@@ -7,7 +7,7 @@ pyjwt
 pymongo
 pytest
 pytest-cov
-requirements
+requests
 routers 
 typing
 uvicorn
