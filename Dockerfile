@@ -4,6 +4,7 @@ FROM python:3.11
 WORKDIR /
 
 # Copies folders into workdir
+COPY common/ common/
 COPY data/ data/
 COPY endpoints endpoints/
 COPY middlewares middlewares/
