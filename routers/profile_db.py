@@ -56,6 +56,11 @@ async def updateWhitelist(whitelist: PutWhiteList):
     update_whitelist(whitelist)
     return Response(status_code=201,content="Lista actualizada")
 
+@router.put("/whitelist",summary="Actualiza la whitelist del servicio")
+async def updateWhitelist(whitelist: PutWhiteList):
+    update_whitelist(whitelist)
+    return Response(status_code=201,content="Lista actualizada")
+
 @router.get("/users/profiles",response_model=List[Profile],summary="Retorna una lista con todos los perfiles")
 async def view_profiles(client_db = Depends(client.get_db)):
     logger.info("buscando todos los perfiles")
