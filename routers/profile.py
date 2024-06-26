@@ -16,7 +16,7 @@ router=APIRouter(tags=["profile"])
 
 # Operaciones de la API
 
-@router.get("/user/profile/status")
+@router.get("/status")
 async def view_status(): 
     return {"status":"ok"}
 
