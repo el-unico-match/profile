@@ -25,11 +25,10 @@ class Settings(BaseSettings):
     apikey_value:str=''
     apikey_status:str=''
     apikey_activate_endpoint:str=''
-    apikey_whitelist_endpoint:str=''
     apikey_whitelist:List[str]=[]
     isIngoingSecurityCheckEnabled:bool=False
     isOutgoingSecurityCheckEnabled:bool=False
 
     model_config = SettingsConfigDict(env_file=("dev.env",".env"))	
-
+    
 settings=Settings()

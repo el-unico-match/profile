@@ -4,6 +4,7 @@ from fastapi import Request
 from fastapi.encoders import jsonable_encoder
 from fastapi.responses import Response
 from starlette.middleware.base import BaseHTTPMiddleware, RequestResponseEndpoint
+from common.swaggerRequestHelper import isRequestSentFromSwagger
 
 logger=logging.getLogger(__name__)
 
@@ -13,9 +14,9 @@ class IngoingSecurityCheck(BaseHTTPMiddleware):
 
         try:
             isApiKeyAllowed = settings.isIngoingSecurityCheckEnabled == False or \
-                ( (settings.isIngoingSecurityCheckEnabled == True) and ('x-apikey' in request.headers) and (request.headers['x-apikey'] in settings.whitelist) )
+                ( (settings.isIngoingSecurityCheckEnabled == True) and ('x-apikey' in request.headers) and (request.headers['x-apikey'] in settings.apikey_whitelist) )
 
-            if ( isApiKeyAllowed == True ):
+            if ( isRequestSentFromSwagger(request) == True or isApiKeyAllowed == True ):
                 response = await call_next(request)
                 return response
 

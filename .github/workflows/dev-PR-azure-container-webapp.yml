@@ -47,6 +47,7 @@ jobs:
           echo "DB_NAME=${{ vars.DB_NAME  }}" >> .env   
           echo "apikey_value=${{ secrets.APIKEY_VALUE  }}" >> .env            
           echo "apikey_activate_endpoint=${{ vars.APIKEY_ACTIVATE_ENDPOINT  }}" >> .env 
+          echo "apikey_whitelist=${{ secrets.APIKEY_WHITELIST }}" >> .env
           echo "isIngoingSecurityCheckEnabled=${{ vars.ISINGOINGSECURITYCHECKENABLED  }}" >> .env 
           echo "isOutgoingSecurityCheckEnabled=${{ vars.ISOUTGOINGSECURITYCHECKENABLED  }}" >> .env          
 
