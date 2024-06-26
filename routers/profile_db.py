@@ -51,6 +51,13 @@ async def view_status():
       "apikeys_count": len(settings.apikey_whitelist),
    }
 
+@router.get("/log",summary="Retorna el log")
+async def view_status(): 
+   logger.info("retornando log")
+   with open(settings.log_filename, "r") as file:
+      contents = file.read()
+      return contents
+
 @router.put("/whitelist",summary="Actualiza la whitelist del servicio")
 async def updateWhitelist(whitelist: PutWhiteList):
     update_whitelist(whitelist)
