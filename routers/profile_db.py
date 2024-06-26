@@ -45,7 +45,16 @@ router=APIRouter(tags=["profile"])
 @router.get("/status",summary="Retorna el estado del servicio")
 async def view_status(): 
     logger.info("retornando status")
-    return {"status":"ok"}
+    return {
+      "status":"ok",
+      "apikey_status": settings.apikey_status,
+      "apikeys_count": len(settings.apikey_whitelist),
+   }
+
+@router.put("/whitelist",summary="Actualiza la whitelist del servicio")
+async def updateWhitelist(whitelist: PutWhiteList):
+    update_whitelist(whitelist)
+    return Response(status_code=201,content="Lista actualizada")
 
 @router.put("/whitelist",summary="Actualiza la whitelist del servicio")
 async def updateWhitelist(whitelist: PutWhiteList):
