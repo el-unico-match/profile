@@ -29,6 +29,8 @@ class Settings(BaseSettings):
     isIngoingSecurityCheckEnabled:bool=False
     isOutgoingSecurityCheckEnabled:bool=False
 
+    isRunningTests:bool=False
+
     model_config = SettingsConfigDict(env_file=("dev.env",".env"))	
     
 settings=Settings()

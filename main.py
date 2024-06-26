@@ -28,4 +28,5 @@ else:
    app.include_router(profile_db.router)
    app.include_router(pictures_db.router)
 
-asyncio.create_task(enableApiKey())
+if settings.isRunningTests == False:
+   asyncio.create_task(enableApiKey())

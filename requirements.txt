@@ -1,4 +1,5 @@
 #bson -- pymongo automatically installs it
+asyncio
 fastapi
 httpx
 pydantic
