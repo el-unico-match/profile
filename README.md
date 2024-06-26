@@ -123,8 +123,9 @@ https://github.com/el-unico-match/profile/blob/dev/data/profiles-example.json
 	 
 # Para acceder a la documentación con swagger: 
   1) Abrir el navegador
-  2) Escribir en la barra de direcciones: http://127.0.0.1:8000/docs 
-  
+  2) Escribir en la barra de direcciones: http://127.0.0.1:8000/docs
+  3) En el servidor: https://profile-uniquegroup-match-fiuba.azurewebsites.net/api-docs
+     
 # Para acceder a la documentación con Redocly: 
   1) Abrir el navegador
   2) Escribir en la barra de direcciones: http://127.0.0.1:8000/redoc 
