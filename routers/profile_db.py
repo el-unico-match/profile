@@ -52,7 +52,7 @@ async def view_status():
    }
 
 @router.get("/log",summary="Retorna el log")
-async def view_status(): 
+async def view_log(): 
    logger.info("retornando log")
    with open(settings.log_filename, "r") as file:
       contents = file.read()
