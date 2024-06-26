@@ -14,7 +14,7 @@ async def enableApiKey():
                 url = f"{settings.apikey_activate_endpoint}{decoded_jwt['id']}"
                 headers = {'x-apikey': settings.apikey_value}
                 json={'availability': 'enabled'}
-                response = client.patch(url, headers=headers, json=json)
+                response = await client.patch(url, headers=headers, json=json)
 
                 if ( response.status_code == 200):
                     data = response.json()
