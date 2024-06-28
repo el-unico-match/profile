@@ -6,8 +6,10 @@ import data.client as client
 from settings import settings
 import logging
 
-logging.basicConfig(format='%(asctime)s [%(filename)s] %(levelname)s %(message)s',filename=settings.log_filename,level=settings.logging_level)
-logger=logging.getLogger(__name__)
+
+#logging.basicConfig(format='%(asctime)s [%(filename)s] %(levelname)s %(message)s',filename=settings.log_filename,level=settings.logging_level)
+logging.basicConfig(format='%(asctime)s [%(filename)s] %(levelname)s %(message)s',level=settings.logging_level)
+logger=logging.getLogger(settings.logger_name)
 
 def picture_schema(picture)-> dict:
     return {"name":picture.name,
