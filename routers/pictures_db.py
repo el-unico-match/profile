@@ -8,8 +8,12 @@ import logging
 
 
 #logging.basicConfig(format='%(asctime)s [%(filename)s] %(levelname)s %(message)s',filename=settings.log_filename,level=settings.logging_level)
-logging.basicConfig(format='%(asctime)s [%(filename)s] %(levelname)s %(message)s',level=settings.logging_level)
-logger=logging.getLogger(settings.logger_name)
+logger=logging.getLogger(__name__)
+streamHandler = logging.StreamHandler()
+streamHandler.setLevel(settings.logging_level)
+formatter = logging.Formatter('%(levelname)s %(asctime)s [%(filename)s] %(message)s')
+streamHandler.setFormatter(formatter)
+logger.addHandler(streamHandler)
 
 def picture_schema(picture)-> dict:
     return {"name":picture.name,
@@ -32,7 +36,7 @@ router=APIRouter(tags=["pictures"])
 
 @router.post("/user/profile/pictures", response_model=Pictures,summary="Crea nuevas imágenes")
 async def create_pictures(new_pictures:Pictures,client_db = Depends(client.get_db)):	 
-   logger.info("creando el imágenes")
+   logger.info("creando imágenes")
    found=client_db.pictures_albums.find_one({"userid":new_pictures.userid})
    
    if found:
@@ -50,7 +54,7 @@ async def create_pictures(new_pictures:Pictures,client_db = Depends(client.get_d
    
 @router.get("/user/profile/pictures/{id}", response_model=Pictures,summary="Retorna las imágenes solicitadas")
 async def view_pictures(client_db = Depends(client.get_db),id: str = Path(..., description="El id del usuario")): 
-   logger.info("buscando el imágenes") 
+   logger.info("buscando imágenes") 
    try:
       pictures_album = client_db.pictures_albums.find_one({"userid":id})
 
@@ -63,7 +67,7 @@ async def view_pictures(client_db = Depends(client.get_db),id: str = Path(..., d
    
 @router.put("/user/profile/pictures/{id}", response_model=Pictures,summary="Actualiza las imágenes solicitadas")
 async def update_pictures(new_pictures:Pictures,client_db = Depends(client.get_db),id: str = Path(..., description="El id del usuario")):     
-   logger.info("actualizando el imágenes")
+   logger.info("actualizando imágenes")
    
    if id!=new_pictures.userid:
       logger.error("El id de la ruta no coincide con el id del perfil")         
