@@ -30,7 +30,6 @@ jobs:
       - name: Create Environment File
         run: |
           echo "DISABLE_DB=${{ vars.DISABLE_DB }}" > .env
-          echo "LOGGER_NAME=uvicorn.error" >> .env
           echo "LOG_FILENAME=${{ vars.LOG_FILENAME  }}" >> .env
           echo "NOTSET=${{ vars.NOTSET  }}" >> .env
           echo "DEBUG=${{ vars.DEBUG  }}" >> .env
