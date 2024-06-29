@@ -9,8 +9,13 @@ import logging
 from endpoints.putWhitelist import PutWhiteList, update_whitelist
 
 #logging.basicConfig(format='%(asctime)s [%(filename)s] %(levelname)s %(message)s',filename=settings.log_filename,level=settings.logging_level)
-logging.basicConfig(format='%(asctime)s [%(filename)s] %(levelname)s %(message)s',level=settings.logging_level)
-logger=logging.getLogger(settings.logger_name)
+logger=logging.getLogger(__name__)
+streamHandler = logging.StreamHandler()
+streamHandler.setLevel(settings.logging_level)
+formatter = logging.Formatter('%(levelname)s %(asctime)s [%(filename)s] %(message)s')
+streamHandler.setFormatter(formatter)
+logger.addHandler(streamHandler)
+
 
 
 def profile_schema(profile)-> dict:
