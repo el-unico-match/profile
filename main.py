@@ -1,6 +1,9 @@
 import logging
 from settings import settings
-logging.basicConfig(filename=settings.log_filename, level=settings.logging_level, format='%(asctime)s - %(levelname)s - %(message)s')
+streamHandler = logging.StreamHandler()
+streamHandler.setLevel(settings.logging_level)
+formatter = logging.Formatter('%(levelname)s %(asctime)s [%(filename)s] %(message)s')
+streamHandler.setFormatter(formatter)
 
 from fastapi import FastAPI
 from routers import profile,profile_db,pictures_db

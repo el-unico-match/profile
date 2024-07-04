@@ -1,12 +1,13 @@
 import logging
+from main import streamHandler
+logger=logging.getLogger(__name__)
+logger.addHandler(streamHandler)
+
 from settings import settings
 from fastapi import Request
-from fastapi.encoders import jsonable_encoder
 from fastapi.responses import Response
 from starlette.middleware.base import BaseHTTPMiddleware, RequestResponseEndpoint
 from common.swaggerRequestHelper import isRequestSentFromSwagger
-
-logger=logging.getLogger(__name__)
 
 class OutgoingSecurityCheck(BaseHTTPMiddleware):
 
@@ -26,8 +27,8 @@ class OutgoingSecurityCheck(BaseHTTPMiddleware):
                 logger.error(error_message)
                 return Response(content=error_message, status_code=503)
      
-        except Exception as e500:
-            exceptionJson = jsonable_encoder(e500)
-            logger.error(exceptionJson, str(e500), exc_info=True)
-            return Response(content='Lo sentimos, algo falló', status_code=500)
+        except Exception:
+            message = 'Lo sentimos, algo falló.'
+            logger.error(message, exc_info=True)
+            return Response(content=message, status_code=500)
 

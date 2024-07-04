@@ -1,10 +1,13 @@
+import logging
+from main import streamHandler
+logger=logging.getLogger(__name__)
+logger.addHandler(streamHandler)
+
 from settings import settings
 import httpx
 import jwt
-import logging
 
 async def enableApiKey():
-    logger=logging.getLogger(__name__)
 
     if (settings.apikey_value != '' and settings.apikey_activate_endpoint != ''):
 
@@ -25,4 +28,4 @@ async def enableApiKey():
                     logger.error(f"Error while enabling apiKey: {str(response.status_code): response.reason}")    
 
         except Exception as error:
-            logger.error(f"Error while enabling apiKey: {str(error)}", exc_info=True)
+            logger.error(f"Error while enabling apiKey", exc_info=True)

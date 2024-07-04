@@ -1,22 +1,15 @@
+import logging
+from main import streamHandler
+logger=logging.getLogger(__name__)
+logger.addHandler(streamHandler)
+
 from fastapi import APIRouter,Path,Depends,Response,HTTPException
-#from data.client import client_db
 from data.profile import Profile
 from typing import List
-from bson import ObjectId
 import data.client as client
 from settings import settings
 import logging
 from endpoints.putWhitelist import PutWhiteList, update_whitelist
-
-#logging.basicConfig(format='%(asctime)s [%(filename)s] %(levelname)s %(message)s',filename=settings.log_filename,level=settings.logging_level)
-logger=logging.getLogger(__name__)
-streamHandler = logging.StreamHandler()
-streamHandler.setLevel(settings.logging_level)
-formatter = logging.Formatter('%(levelname)s %(asctime)s [%(filename)s] %(message)s')
-streamHandler.setFormatter(formatter)
-logger.addHandler(streamHandler)
-
-
 
 def profile_schema(profile)-> dict:
     return {"userid":profile["userid"],

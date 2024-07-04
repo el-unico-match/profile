@@ -1,19 +1,11 @@
-from fastapi import APIRouter,Path,Depends,Response,HTTPException
-#from data.client import client_db
-from data.pictures import Picture,Pictures
-from bson import ObjectId
-import data.client as client
-from settings import settings
 import logging
-
-
-#logging.basicConfig(format='%(asctime)s [%(filename)s] %(levelname)s %(message)s',filename=settings.log_filename,level=settings.logging_level)
+from main import streamHandler
 logger=logging.getLogger(__name__)
-streamHandler = logging.StreamHandler()
-streamHandler.setLevel(settings.logging_level)
-formatter = logging.Formatter('%(levelname)s %(asctime)s [%(filename)s] %(message)s')
-streamHandler.setFormatter(formatter)
 logger.addHandler(streamHandler)
+
+from fastapi import APIRouter,Path,Depends,HTTPException
+from data.pictures import Pictures
+import data.client as client
 
 def picture_schema(picture)-> dict:
     return {"name":picture.name,
